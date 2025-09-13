@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUREVEDA - Ayurvedic Wellness Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #faf8f5;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        /* Design System Colors */
+        :root {
+            --primary-gold: #d4af37;
+            --primary-sage: #8fbc8f;
+            --warm-cream: #faf8f5;
+            --earth-brown: #8b4513;
+            --deep-green: #2e7d32;
+            --accent-orange: #ff8c42;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --white: #ffffff;
+            --shadow-soft: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        /* Ayurvedic Pattern Background */
+        .ayurveda-pattern {
+            background-image: 
+                radial-gradient(circle at 20px 20px, rgba(212, 175, 55, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 60px 60px, rgba(143, 188, 143, 0.1) 1px, transparent 1px);
+            background-size: 80px 80px, 40px 40px;
+        }
+
+        /* Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-gold);
+        }
+
+        /* User Profile Dropdown */
+        .user-profile {
+            position: relative;
+            display: none;
+        }
+
+        .user-profile.show {
+            display: block;
+        }
+
+        .profile-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--primary-gold), #e6c56b);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .profile-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow-hover);
+            margin-top: 0.5rem;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .profile-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: background 0.2s ease;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 0.875rem;
+        }
+
+        .dropdown-item:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .dropdown-item:last-child {
+            border-radius: 0 0 12px 12px;
+        }
+
+        .dropdown-item:hover {
+            background: var(--warm-cream);
+        }
+
+        .dropdown-item.logout {
+            border-top: 1px solid #e2e8f0;
+            color: #e53e3e;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .auth-buttons.hidden {
+            display: none;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-gold), #e6c56b);
+            color: white;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-gold);
+            border: 2px solid var(--primary-gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-gold);
+            color: white;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+        }
+
+        /* Page Container */
+        .page-container {
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Landing Page Styles */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--earth-brown), var(--primary-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .meditation-circle {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(143, 188, 143, 0.2), rgba(212, 175, 55, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .meditation-circle::before {
+            content: '🧘‍♀️';
+            font-size: 4rem;
+            position: absolute;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.6;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: -1s; }
+        .floating-element:nth-child(2) { top: 20%; right: 15%; animation-delay: -2s; }
+        .floating-element:nth-child(3) { bottom: 20%; left: 20%; animation-delay: -3s; }
+        .floating-element:nth-child(4) { bottom: 10%; right: 10%; animation-delay: -4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: var(--shadow-hover);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .modal h3 {
+            color: var(--earth-brown);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+        }
+
+        /* Dashboard Styles */
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--earth-brown);
+            margin-bottom: 0.5rem;
+        }
+
+        .user-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+            min-width: 120px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+
+        .dashboard-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        /* Progress Path */
+        .progress-section {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--earth-brown);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-path {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .path-line {
+            position: absolute;
+            left: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-sage), var(--primary-gold));
+            border-radius: 2px;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .progress-step:hover {
+            transform: translateX(5px);
+        }
+
+        .step-circle {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            z-index: 2;
+            position: relative;
+        }
+
+        .step-circle.completed {
+            background: linear-gradient(135deg, var(--primary-sage), var(--deep-green));
+            color: white;
+        }
+
+        .step-circle.current {
+            background: linear-gradient(135deg, var(--primary-gold), #e6c56b);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .step-circle.upcoming {
+            background: #f0f0f0;
+            color: var(--text-light);
+            border: 3px solid #e0e0e0;
+        }
+
+        .step-content {
+            margin-left: 1.5rem;
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .step-description {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .step-reward {
+            background: linear-gradient(135deg, #fff7e6, #ffeccc);
+            border: 1px solid var(--primary-gold);
+            border-radius: 12px;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            color: var(--earth-brown);
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Sidebar */
+        .dashboard-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .next-session {
+            border-left: 4px solid var(--accent-orange);
+        }
+
+        .session-time {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .session-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .session-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .achievements {
+            text-align: center;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .achievement-badge {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .achievement-badge.earned {
+            background: linear-gradient(135deg, var(--primary-gold), #e6c56b);
+            transform: scale(1);
+        }
+
+        .achievement-badge.locked {
+            background: #f0f0f0;
+            filter: grayscale(100%);
+            opacity: 0.5;
+        }
+
+        .achievement-badge:hover.earned {
+            transform: scale(1.1);
+        }
+
+        /* About, Services, Doctors Pages */
+        .content-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .content-page h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--earth-brown);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .content-card h3 {
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .content-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 2rem;
+            background: linear-gradient(135deg, var(--primary-sage), var(--deep-green));
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow-soft);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1500;
+            max-width: 300px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .dashboard-content {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+
+            .user-stats {
+                gap: 1rem;
+            }
+
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links .nav-link {
+                display: none;
+            }
+
+            .meditation-circle {
+                width: 300px;
+                height: 300px;
+            }
+
+            .content-page {
+                padding: 2rem 1rem;
+            }
+
+            .content-page h2 {
+                font-size: 2rem;
+            }
+
+            .toast {
+                right: 1rem;
+                left: 1rem;
+                max-width: none;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 2px solid white;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Progress Bars */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .progress-water {
+            background: linear-gradient(90deg, var(--primary-sage), var(--deep-green));
+        }
+
+        .progress-meditation {
+            background: linear-gradient(90deg, var(--primary-gold), #e6c56b);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav">
+            <a href="#" class="logo" id="logoBtn">CUREVEDA</a>
+            <div class="nav-links">
+                <a href="#" class="nav-link" id="aboutBtn">About</a>
+                <a href="#" class="nav-link" id="servicesBtn">Services</a>
+                <a href="#" class="nav-link" id="doctorsBtn">Doctors</a>
+                
+                <!-- Auth buttons - shown when not logged in -->
+                <div class="auth-buttons" id="authButtons">
+                    <button class="btn btn-secondary" id="loginBtn">Login</button>
+                    <button class="btn btn-primary" id="signupBtn">Sign Up</button>
+                </div>
+                
+                <!-- User profile - shown when logged in -->
+                <div class="user-profile" id="userProfile">
+                    <button class="profile-button" id="profileToggle">
+                        <div class="profile-avatar" id="profileAvatar">P</div>
+                        <span id="profileName">Priya</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <button class="dropdown-item" id="dashboardBtn">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Dashboard
+                        </button>
+                        <button class="dropdown-item" id="profileSettingsBtn">
+                            <i class="fas fa-user-cog"></i>
+                            Profile Settings
+                        </button>
+                        <button class="dropdown-item" id="mySessionsBtn">
+                            <i class="fas fa-calendar"></i>
+                            My Sessions
+                        </button>
+                        <button class="dropdown-item" id="myProgressBtn">
+                            <i class="fas fa-chart-line"></i>
+                            Progress Report
+                        </button>
+                        <button class="dropdown-item" id="notificationsBtn">
+                            <i class="fas fa-bell"></i>
+                            Notifications
+                            <span style="margin-left: auto; background: #e53e3e; color: white; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">3</span>
+                        </button>
+                        <button class="dropdown-item logout" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Landing Page -->
+    <div id="landing" class="page page-container ayurveda-pattern active">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Heal Naturally with Ancient Ayurveda</h1>
+                    <p>Experience personalized Ayurvedic healing journeys guided by expert practitioners. Discover your unique constitution and path to wellness through time-tested natural remedies.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" id="startJourneyBtn">Start Your Journey</button>
+                        <button class="btn btn-secondary" id="learnMoreBtn">Learn More</button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="meditation-circle">
+                        <div class="floating-elements">
+                            <div class="floating-element">🌿</div>
+                            <div class="floating-element">🧘</div>
+                            <div class="floating-element">🌸</div>
+                            <div class="floating-element">✨</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page page-container">
+        <div class="content-page">
+            <h2>About CUREVEDA</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin-bottom: 3rem;">
+                CUREVEDA bridges ancient Ayurvedic wisdom with modern healthcare technology to create personalized wellness journeys.
+            </p>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>🌱 Our Philosophy</h3>
+                    <p>We believe in treating the root cause, not just symptoms. Our approach combines 5000-year-old Ayurvedic principles with modern scientific understanding to create truly personalized healing experiences.</p>
+                </div>
+                <div class="content-card">
+                    <h3>🎯 Our Mission</h3>
+                    <p>To make authentic Ayurvedic healing accessible to everyone through technology, expert guidance, and gamified wellness journeys that inspire lasting lifestyle changes.</p>
+                </div>
+                <div class="content-card">
+                    <h3>⭐ Our Values</h3>
+                    <p>Authenticity, personalization, and holistic wellness guide everything we do. We honor traditional knowledge while embracing innovation to serve our community better.</p>
+                </div>
+                <div class="content-card">
+                    <h3>🏆 Our Approach</h3>
+                    <p>Every individual is unique, and so should be their healing journey. We combine constitutional assessment, personalized treatment plans, and modern tracking to optimize your wellness path.</p>
+                </div>
+                <div class="content-card">
+                    <h3>🌍 Global Reach</h3>
+                    <p>Serving thousands of patients worldwide, we bring authentic Ayurvedic care to your doorstep through our network of certified practitioners and digital wellness platform.</p>
+                </div>
+                <div class="content-card">
+                    <h3>🔬 Scientific Backing</h3>
+                    <p>Our treatments are backed by both ancient texts and modern research. We continuously validate our approaches through clinical studies and patient outcome tracking.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Page -->
+    <div id="services" class="page page-container">
+        <div class="content-page">
+            <h2>Our Services</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin-bottom: 3rem;">
+                Comprehensive Ayurvedic wellness services tailored to your unique constitution and health goals.
+            </p>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>🔍 Constitutional Assessment</h3>
+                    <p>Detailed Prakriti analysis to understand your unique Dosha composition and create personalized treatment plans based on your individual constitution and current health status.</p>
+                </div>
+                <div class="content-card">
+                    <h3>🍃 Herbal Medicine</h3>
+                    <p>Custom herbal formulations prepared by expert practitioners using authentic, quality-tested ingredients sourced directly from certified organic farms.</p>
+                </div>
+                <div class="content-card">
+                    <h3>🥗 Nutrition Guidance</h3>
+                    <p>Personalized diet plans based on your constitution, seasonal considerations, and health objectives. Includes meal planning and cooking guidance.</p>
+                </div>
+                <div class="content-card">
+                    <h3>🧘 Lifestyle Coaching</h3>
+                    <p>Daily routine optimization, stress management, and mindfulness practices tailored to your lifestyle and work schedule for sustainable wellness.</p>
+                </div>
+                <div class="content-card">
+                    <h3>💆 Panchakarma Therapy</h3>
+                    <p>Traditional detoxification and rejuvenation treatments performed by certified Ayurvedic therapists in our wellness centers and partner clinics.</p>
+                </div>
+                <div class="content-card">
+                    <h3>📱 Digital Wellness</h3>
+                    <p>Gamified progress tracking, reminder systems, and virtual consultations to keep you motivated and connected with your wellness journey.</p>
+                </div>
+                <div class="content-card">
+                    <h3>🏥 Chronic Disease Management</h3>
+                    <p>Specialized programs for diabetes, hypertension, arthritis, and other chronic conditions using integrated Ayurvedic and modern approaches.</p>
+                </div>
+                <div class="content-card">
+                    <h3>👶 Family Wellness</h3>
+                    <p>Ayurvedic care for the whole family, including pediatric care, women's health, and elder care programs designed for different life stages.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Doctors Page -->
+    <div id="doctors" class="page page-container">
+        <div class="content-page">
+            <h2>Meet Our Experts</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: var(--text-light); margin-bottom: 3rem;">
+                Our team of certified Ayurvedic practitioners combines traditional training with modern healthcare expertise.
+            </p>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3>👨‍⚕️ Dr. Rajesh Sharma</h3>
+                    <p><strong>BAMS, MD (Ayurveda)</strong><br>15+ years experience in Panchakarma and constitutional medicine. Specializes in digestive disorders and stress management. Available for consultations Mon-Fri, 9 AM - 6 PM.</p>
+                    <button class="btn btn-primary btn-small consultation-btn" style="margin-top: 1rem;" data-doctor="Dr. Rajesh Sharma">Book Consultation</button>
+                </div>
+                <div class="content-card">
+                    <h3>👩‍⚕️ Dr. Priya Mehta</h3>
+                    <p><strong>BAMS, PhD (Ayurvedic Pharmacology)</strong><br>Expert in women's health and herbal medicine formulation. Pioneer in modern Ayurvedic research with 12+ years of clinical experience.</p>
+                    <button class="btn btn-primary btn-small consultation-btn" style="margin-top: 1rem;" data-doctor="Dr. Priya Mehta">Book Consultation</button>
+                </div>
+                <div class="content-card">
+                    <h3>👨‍⚕️ Dr. Anil Kumar</h3>
+                    <p><strong>BAMS, MSc (Yoga Therapy)</strong><br>Integrative approach combining Ayurveda with yoga therapy. Specializes in mental health and chronic conditions with focus on holistic healing.</p>
+                    <button class="btn btn-primary btn-small consultation-btn" style="margin-top: 1rem;" data-doctor="Dr. Anil Kumar">Book Consultation</button>
+                </div>
+                <div class="content-card">
+                    <h3>👩‍⚕️ Dr. Sunita Reddy</h3>
+                    <p><strong>BAMS, Diploma in Naturopathy</strong><br>Pediatric Ayurveda specialist with expertise in immunity building and developmental wellness for children. 10+ years in family healthcare.</p>
+                    <button class="btn btn-primary btn-small consultation-btn" style="margin-top: 1rem;" data-doctor="Dr. Sunita Reddy">Book Consultation</button>
+                </div>
+                <div class="content-card">
+                    <h3>👨‍⚕️ Dr. Vikram Singh</h3>
+                    <p><strong>BAMS, MD (Panchakarma)</strong><br>Detox and rejuvenation specialist with expertise in traditional Panchakarma therapies. Focuses on weight management and metabolic disorders.</p>
+                    <button class="btn btn-primary btn-small consultation-btn" style="margin-top: 1rem;" data-doctor="Dr. Vikram Singh">Book Consultation</button>
+                </div>
+                <div class="content-card">
+                    <h3>👩‍⚕️ Dr. Kavya Nair</h3>
+                    <p><strong>BAMS, MSc (Ayurvedic Nutrition)</strong><br>Nutrition and lifestyle specialist focusing on preventive healthcare. Expert in diet therapy for various health conditions with 8+ years experience.</p>
+                    <button class="btn btn-primary btn-small consultation-btn" style="margin-top: 1rem;" data-doctor="Dr. Kavya Nair">Book Consultation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patient Dashboard -->
+    <div id="dashboard" class="page page-container">
+        <div class="dashboard-header">
+            <h2>Welcome back, <span id="userName">Priya</span>! 🙏</h2>
+            <div class="user-stats">
+                <div class="stat-card" id="streakCard">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-value" id="streakCount">28</div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+                <div class="stat-card" id="coinsCard">
+                    <div class="stat-icon">🪙</div>
+                    <div class="stat-value" id="coinCount">1,247</div>
+                    <div class="stat-label">Wellness Coins</div>
+                </div>
+                <div class="stat-card" id="levelCard">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value" id="userLevel">Level 4</div>
+                    <div class="stat-label">Wellness Level</div>
+                </div>
+                <div class="stat-card" id="progressCard">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-value" id="goalProgress">85%</div>
+                    <div class="stat-label">Goal Progress</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="progress-section">
+                <h3 class="section-title">🌱 Your Healing Journey</h3>
+                <div class="progress-path">
+                    <div class="path-line"></div>
+                    
+                    <div class="progress-step" data-step="1">
+                        <div class="step-circle completed">✅</div>
+                        <div class="step-content">
+                            <div class="step-title">Constitutional Assessment</div>
+                            <div class="step-description">Discover your unique Dosha profile</div>
+                            <div class="step-reward">+200 coins earned</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-step" data-step="2">
+                        <div class="step-circle completed">✅</div>
+                        <div class="step-content">
+                            <div class="step-title">Personalized Diet Plan</div>
+                            <div class="step-description">Custom nutrition based on your constitution</div>
+                            <div class="step-reward">+150 coins earned</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-step" data-step="3">
+                        <div class="step-circle current">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Daily Meditation Practice</div>
+                            <div class="step-description">Build mindfulness with guided sessions</div>
+                            <div class="step-reward">+50 coins per session</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-step" data-step="4">
+                        <div class="step-circle upcoming">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Herbal Medicine Consultation</div>
+                            <div class="step-description">Personalized herbal remedies</div>
+                            <div class="step-reward">+300 coins</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-step" data-step="5">
+                        <div class="step-circle upcoming">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Lifestyle Integration</div>
+                            <div class="step-description">Daily routines for optimal health</div>
+                            <div class="step-reward">+250 coins</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-sidebar">
+                <div class="sidebar-card next-session">
+                    <div class="session-time">Next Session • Today, 4:00 PM</div>
+                    <div class="session-title">Pranayama Breathing</div>
+                    <div class="session-meta">
+                        <span>📅 20 min</span>
+                        <span>👨‍⚕️ Dr. Sharma</span>
+                    </div>
+                    <button class="btn btn-primary" id="joinSessionBtn" style="width: 100%; font-size: 0.875rem;">Join Session</button>
+                </div>
+
+                <div class="sidebar-card achievements">
+                    <h4 class="section-title" style="font-size: 1.125rem; margin-bottom: 1rem;">🏆 Achievements</h4>
+                    <div class="achievement-grid">
+                        <div class="achievement-badge earned" data-achievement="streak" title="7-Day Streak">🔥</div>
+                        <div class="achievement-badge earned" data-achievement="assessment" title="First Assessment">📋</div>
+                        <div class="achievement-badge earned" data-achievement="diet" title="Diet Plan Completed">🥗</div>
+                        <div class="achievement-badge earned" data-achievement="meditation" title="Meditation Master">🧘</div>
+                        <div class="achievement-badge locked" data-achievement="herbal" title="Herbal Wisdom">🌿</div>
+                        <div class="achievement-badge locked" data-achievement="guru" title="Wellness Guru">⭐</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h4 class="section-title" style="font-size: 1.125rem; margin-bottom: 1rem;">📊 Today's Progress</h4>
+                    <div style="margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-size: 0.875rem;">Water Intake</span>
+                            <span style="font-size: 0.875rem; color: var(--primary-sage);" id="waterProgress">6/8 glasses</span>
+                        </div>
+                        <div class="progress-bar" id="waterBar">
+                            <div class="progress-fill progress-water" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-size: 0.875rem;">Meditation</span>
+                            <span style="font-size: 0.875rem; color: var(--primary-gold);" id="meditationProgress">15/20 min</span>
+                        </div>
+                        <div class="progress-bar" id="meditationBar">
+                            <div class="progress-fill progress-meditation" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-small" id="addActivityBtn" style="width: 100%; margin-top: 1rem;">Log Activity</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="loginModalClose">&times;</button>
+            <h3>Welcome Back</h3>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <span id="loginLoading" class="loading" style="display: none;"></span>
+                    Log In
+                </button>
+                <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--text-light);">
+                    Demo: Use any email and password
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="signupModalClose">&times;</button>
+            <h3>Start Your Journey</h3>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="healthGoal">Primary Health Goal</label>
+                    <select id="healthGoal" required>
+                        <option value="">Select your goal</option>
+                        <option value="stress">Stress Management</option>
+                        <option value="digestion">Digestive Health</option>
+                        <option value="energy">Energy & Vitality</option>
+                        <option value="weight">Weight Management</option>
+                        <option value="sleep">Better Sleep</option>
+                        <option value="immunity">Immunity Boost</option>
+                        <option value="chronic">Chronic Disease Management</option>
+                        <option value="mental">Mental Wellness</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <span id="signupLoading" class="loading" style="display: none;"></span>
+                    Create Account
+                </button>
+                <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--text-light);">
+                    Demo: Use any information to try the platform
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Consultation Booking Modal -->
+    <div id="consultationModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="consultationModalClose">&times;</button>
+            <h3>Book Consultation</h3>
+            <form id="consultationForm">
+                <div class="form-group">
+                    <label for="doctorName">Selected Doctor</label>
+                    <input type="text" id="doctorName" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="consultationDate">Preferred Date</label>
+                    <input type="date" id="consultationDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="consultationTime">Preferred Time</label>
+                    <select id="consultationTime" required>
+                        <option value="">Select time slot</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="consultationType">Consultation Type</label>
+                    <select id="consultationType" required>
+                        <option value="">Select type</option>
+                        <option value="initial">Initial Consultation (60 min) - $150</option>
+                        <option value="followup">Follow-up (30 min) - $75</option>
+                        <option value="emergency">Emergency (Available 24/7) - $200</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="healthConcern">Primary Health Concern</label>
+                    <textarea id="healthConcern" rows="3" placeholder="Brief description of your health concern or goals" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <span id="consultationLoading" class="loading" style="display: none;"></span>
+                    Book Consultation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toastMessage">Action completed successfully!</span>
+    </div>
+
+    <script>
+        // Application State
+        let currentUser = null;
+        let userStats = {
+            streak: 28,
+            coins: 1247,
+            level: 4,
+            progress: 85,
+            waterGlasses: 6,
+            meditationMinutes: 15
+        };
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('CUREVEDA app initializing...');
+            
+            // Set minimum date for consultation booking to today
+            const today = new Date().toISOString().split('T')[0];
+            const consultationDate = document.getElementById('consultationDate');
+            if (consultationDate) {
+                consultationDate.min = today;
+            }
+
+            // Add event listeners
+            addEventListeners();
+
+            // Initialize animations
+            initializeAnimations();
+
+            // Welcome message
+            setTimeout(() => {
+                showToast('🙏 Welcome to CUREVEDA! Your journey to natural wellness begins here.');
+            }, 1000);
+
+            console.log('CUREVEDA app initialized successfully');
+        });
+
+        function addEventListeners() {
+            // Navigation
+            document.getElementById('logoBtn').addEventListener('click', () => showPage('landing'));
+            document.getElementById('aboutBtn').addEventListener('click', () => showPage('about'));
+            document.getElementById('servicesBtn').addEventListener('click', () => showPage('services'));
+            document.getElementById('doctorsBtn').addEventListener('click', () => showPage('doctors'));
+
+            // Auth buttons
+            document.getElementById('loginBtn').addEventListener('click', () => openModal('login'));
+            document.getElementById('signupBtn').addEventListener('click', () => openModal('signup'));
+            document.getElementById('startJourneyBtn').addEventListener('click', startJourney);
+            document.getElementById('learnMoreBtn').addEventListener('click', () => showPage('about'));
+
+            // Profile dropdown
+            document.getElementById('profileToggle').addEventListener('click', toggleProfileDropdown);
+            document.getElementById('dashboardBtn').addEventListener('click', () => { showPage('dashboard'); closeProfileDropdown(); });
+            document.getElementById('profileSettingsBtn').addEventListener('click', showProfileSettings);
+            document.getElementById('mySessionsBtn').addEventListener('click', showMySessions);
+            document.getElementById('myProgressBtn').addEventListener('click', showMyProgress);
+            document.getElementById('notificationsBtn').addEventListener('click', showNotifications);
+            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+
+            // Dashboard interactions
+            document.getElementById('streakCard').addEventListener('click', showStreakDetails);
+            document.getElementById('coinsCard').addEventListener('click', showCoinsDetails);
+            document.getElementById('levelCard').addEventListener('click', showLevelDetails);
+            document.getElementById('progressCard').addEventListener('click', showProgressDetails);
+
+            // Progress steps
+            document.querySelectorAll('.progress-step').forEach(step => {
+                step.addEventListener('click', () => {
+                    const stepNum = step.getAttribute('data-step');
+                    stepClick(parseInt(stepNum));
+                });
+            });
+
+            // Achievements
+            document.querySelectorAll('.achievement-badge').forEach(badge => {
+                badge.addEventListener('click', () => {
+                    const achievement = badge.getAttribute('data-achievement');
+                    showAchievement(achievement);
+                });
+            });
+
+            // Dashboard actions
+            document.getElementById('joinSessionBtn').addEventListener('click', joinSession);
+            document.getElementById('waterBar').addEventListener('click', updateWater);
+            document.getElementById('meditationBar').addEventListener('click', updateMeditation);
+            document.getElementById('addActivityBtn').addEventListener('click', addDailyActivity);
+
+            // Modal close buttons
+            document.getElementById('loginModalClose').addEventListener('click', () => closeModal('login'));
+            document.getElementById('signupModalClose').addEventListener('click', () => closeModal('signup'));
+            document.getElementById('consultationModalClose').addEventListener('click', () => closeModal('consultation'));
+
+            // Form submissions
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('signupForm').addEventListener('submit', handleSignup);
+            document.getElementById('consultationForm').addEventListener('submit', handleConsultation);
+
+            // Consultation booking buttons
+            document.querySelectorAll('.consultation-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const doctorName = btn.getAttribute('data-doctor');
+                    bookConsultation(doctorName);
+                });
+            });
+
+            // Close modals and dropdowns when clicking outside
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('modal')) {
+                    const modalId = event.target.id.replace('Modal', '');
+                    closeModal(modalId);
+                }
+                
+                if (!event.target.closest('.user-profile')) {
+                    closeProfileDropdown();
+                }
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    document.querySelectorAll('.modal.show').forEach(modal => {
+                        modal.classList.remove('show');
+                    });
+                    document.body.style.overflow = 'auto';
+                    closeProfileDropdown();
+                }
+            });
+        }
+
+        function initializeAnimations() {
+            // Initialize floating elements animation
+            const floatingElements = document.querySelectorAll('.floating-element');
+            floatingElements.forEach((el, index) => {
+                el.style.animationDelay = `-${index}s`;
+            });
+
+            // Initialize achievement hover effects
+            const achievements = document.querySelectorAll('.achievement-badge.earned');
+            achievements.forEach(badge => {
+                badge.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.2) rotate(10deg)';
+                });
+                badge.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+        }
+
+        // Page Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.history.pushState({page: pageId}, '', `#${pageId}`);
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Modal Functions
+        function openModal(modalType) {
+            const modal = document.getElementById(modalType + 'Modal');
+            if (modal) {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalType) {
+            const modal = document.getElementById(modalType + 'Modal');
+            if (modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Authentication Functions
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                showToast('❌ Please fill in all fields');
+                return;
+            }
+            
+            document.getElementById('loginLoading').style.display = 'inline-block';
+            
+            setTimeout(() => {
+                currentUser = {
+                    name: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1),
+                    email: email
+                };
+                
+                updateUserInterface();
+                document.getElementById('loginLoading').style.display = 'none';
+                closeModal('login');
+                showPage('dashboard');
+                showToast('🎉 Welcome back, ' + currentUser.name + '!');
+                
+                // Reset form
+                document.getElementById('loginForm').reset();
+            }, 1500);
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const healthGoal = document.getElementById('healthGoal').value;
+            
+            if (!name || !email || !password || !healthGoal) {
+                showToast('❌ Please fill in all fields');
+                return;
+            }
+            
+            document.getElementById('signupLoading').style.display = 'inline-block';
+            
+            setTimeout(() => {
+                currentUser = {
+                    name: name,
+                    email: email,
+                    healthGoal: healthGoal
+                };
+                
+                updateUserInterface();
+                document.getElementById('signupLoading').style.display = 'none';
+                closeModal('signup');
+                showPage('dashboard');
+                showToast('🎉 Welcome to CUREVEDA, ' + name + '! Your wellness journey begins now!');
+                
+                // Reset form
+                document.getElementById('signupForm').reset();
+            }, 2000);
+        }
+
+        // Update user interface when logged in
+        function updateUserInterface() {
+            document.getElementById('authButtons').classList.add('hidden');
+            document.getElementById('userProfile').classList.add('show');
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profileAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+            document.getElementById('userName').textContent = currentUser.name;
+        }
+
+        // Profile dropdown functions
+        function toggleProfileDropdown() {
+            document.getElementById('profileDropdown').classList.toggle('show');
+        }
+
+        function closeProfileDropdown() {
+            document.getElementById('profileDropdown').classList.remove('show');
+        }
+
+        function showProfileSettings() {
+            closeProfileDropdown();
+            showToast('⚙️ Profile settings feature coming soon! You can update your preferences and health goals.');
+        }
+
+        function showMySessions() {
+            closeProfileDropdown();
+            showToast('📅 My Sessions: You have 1 upcoming session and 12 completed sessions this month.');
+        }
+
+        function showMyProgress() {
+            closeProfileDropdown();
+            showToast('📊 Progress Report: 85% goal completion, 28-day streak, Level 4 achieved!');
+        }
+
+        function showNotifications() {
+            closeProfileDropdown();
+            showToast('🔔 Notifications: 1 upcoming session reminder, 2 achievement unlocks pending!');
+        }
+
+        function handleLogout() {
+            closeProfileDropdown();
+            
+            if (confirm('Are you sure you want to logout?')) {
+                currentUser = null;
+                document.getElementById('authButtons').classList.remove('hidden');
+                document.getElementById('userProfile').classList.remove('show');
+                showPage('landing');
+                showToast('👋 You have been logged out. Thank you for using CUREVEDA!');
+            }
+        }
+
+        // Journey Functions
+        function startJourney() {
+            if (currentUser) {
+                showPage('dashboard');
+            } else {
+                openModal('signup');
+            }
+        }
+
+        // Consultation Booking
+        function bookConsultation(doctorName) {
+            document.getElementById('doctorName').value = doctorName;
+            openModal('consultation');
+        }
+
+        function handleConsultation(event) {
+            event.preventDefault();
+            const doctor = document.getElementById('doctorName').value;
+            const date = document.getElementById('consultationDate').value;
+            const time = document.getElementById('consultationTime').value;
+            const type = document.getElementById('consultationType').value;
+            const concern = document.getElementById('healthConcern').value;
+            
+            if (!date || !time || !type || !concern) {
+                showToast('❌ Please fill in all fields');
+                return;
+            }
+            
+            document.getElementById('consultationLoading').style.display = 'inline-block';
+            
+            setTimeout(() => {
+                document.getElementById('consultationLoading').style.display = 'none';
+                closeModal('consultation');
+                showToast('🎉 Consultation booked with ' + doctor + ' on ' + date + ' at ' + time + '!');
+                document.getElementById('consultationForm').reset();
+            }, 2000);
+        }
+
+        // Dashboard Interactions
+        function showStreakDetails() {
+            showToast('🔥 Amazing! You\'ve maintained your wellness routine for ' + userStats.streak + ' consecutive days!');
+        }
+
+        function showCoinsDetails() {
+            showToast('🪙 You have ' + userStats.coins + ' wellness coins! Use them for premium features and rewards.');
+        }
+
+        function showLevelDetails() {
+            showToast('⭐ You\'re at Wellness Level ' + userStats.level + '! Keep progressing to unlock more features.');
+        }
+
+        function showProgressDetails() {
+            showToast('🎯 You\'re ' + userStats.progress + '% towards your current health goals. Keep it up!');
+        }
+
+        // Progress Step Interactions
+        function stepClick(stepNumber) {
+            const messages = {
+                1: '✅ Constitutional Assessment completed! Your Dosha profile: Vata-Pitta dominant.',
+                2: '✅ Personalized Diet Plan active! Following Vata-pacifying nutrition guidelines.',
+                3: '🧘 Current: Daily Meditation Practice. Complete today\'s session to earn 50 coins!',
+                4: '🌿 Next: Herbal Medicine Consultation scheduled. Unlock by completing meditation streak.',
+                5: '🏠 Final: Lifestyle Integration. The complete wellness transformation awaits!'
+            };
+            showToast(messages[stepNumber]);
+        }
+
+        // Session Functions
+        function joinSession() {
+            showToast('🧘 Joining Pranayama session with Dr. Sharma... Session will start in 5 minutes!');
+            
+            setTimeout(() => {
+                userStats.coins += 50;
+                userStats.meditationMinutes = Math.min(20, userStats.meditationMinutes + 5);
+                updateStats();
+                updateDailyProgress();
+                showToast('🎉 Session completed! +50 coins earned. Great breathing work!');
+            }, 3000);
+        }
+
+        // Achievement Functions
+        function showAchievement(type) {
+            const achievements = {
+                'streak': '🔥 7-Day Streak: Maintained daily wellness activities for a week!',
+                'assessment': '📋 First Assessment: Completed your constitutional analysis!',
+                'diet': '🥗 Diet Master: Following personalized nutrition plan for 2 weeks!',
+                'meditation': '🧘 Meditation Master: Completed 50 meditation sessions!',
+                'herbal': '🌿 Herbal Wisdom: Unlock by completing herbal consultation.',
+                'guru': '⭐ Wellness Guru: Unlock by reaching Level 5 and helping others.'
+            };
+            showToast(achievements[type]);
+        }
+
+        // Progress Tracking
+        function updateWater() {
+            if (userStats.waterGlasses < 8) {
+                userStats.waterGlasses++;
+                userStats.coins += 5;
+                updateDailyProgress();
+                updateStats();
+                showToast('💧 Great! Glass #' + userStats.waterGlasses + ' logged. +5 coins!');
+                
+                if (userStats.waterGlasses === 8) {
+                    setTimeout(() => {
+                        showToast('🎉 Daily water goal achieved! Bonus +25 coins!');
+                        userStats.coins += 25;
+                        updateStats();
+                    }, 1000);
+                }
+            } else {
+                showToast('🎉 Daily water goal already achieved! Excellent hydration!');
+            }
+        }
+
+        function updateMeditation() {
+            if (userStats.meditationMinutes < 20) {
+                userStats.meditationMinutes += 5;
+                userStats.coins += 10;
+                updateDailyProgress();
+                updateStats();
+                showToast('🧘 5 minutes of mindfulness logged. +10 coins!');
+                
+                if (userStats.meditationMinutes === 20) {
+                    setTimeout(() => {
+                        showToast('🎉 Daily meditation goal achieved! Bonus +30 coins!');
+                        userStats.coins += 30;
+                        updateStats();
+                    }, 1000);
+                }
+            } else {
+                showToast('🎉 Daily meditation goal already achieved! Inner peace unlocked!');
+            }
+        }
+
+        function addDailyActivity() {
+            const activities = [
+                'Morning yoga (15 min)',
+                'Herbal tea consumption',
+                'Mindful eating practice',
+                'Evening walk (20 min)',
+                'Gratitude journaling',
+                'Breathing exercises',
+                'Oil pulling',
+                'Tongue scraping',
+                'Abhyanga massage',
+                'Reading Ayurvedic texts'
+            ];
+            
+            const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+            const coinReward = Math.floor(Math.random() * 20) + 15; // 15-34 coins
+            
+            userStats.coins += coinReward;
+            updateStats();
+            showToast('✨ Activity logged: ' + randomActivity + '. +' + coinReward + ' coins earned!');
+        }
+
+        // Update Functions
+        function updateStats() {
+            document.getElementById('coinCount').textContent = userStats.coins.toLocaleString();
+            document.getElementById('streakCount').textContent = userStats.streak;
+            
+            // Level up logic
+            const newLevel = Math.floor(userStats.coins / 300) + 1;
+            if (newLevel > userStats.level) {
+                userStats.level = newLevel;
+                document.getElementById('userLevel').textContent = 'Level ' + userStats.level;
+                setTimeout(() => {
+                    showToast('🎉 LEVEL UP! You\'ve reached Wellness Level ' + userStats.level + '! New features unlocked!');
+                }, 500);
+            }
+        }
+
+        function updateDailyProgress() {
+            // Update water progress
+            document.getElementById('waterProgress').textContent = userStats.waterGlasses + '/8 glasses';
+            const waterFill = document.querySelector('#waterBar .progress-fill');
+            if (waterFill) {
+                waterFill.style.width = (userStats.waterGlasses / 8 * 100) + '%';
+            }
+            
+            // Update meditation progress
+            document.getElementById('meditationProgress').textContent = userStats.meditationMinutes + '/20 min';
+            const meditationFill = document.querySelector('#meditationBar .progress-fill');
+            if (meditationFill) {
+                meditationFill.style.width = (userStats.meditationMinutes / 20 * 100) + '%';
+            }
+        }
+
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            if (toast && toastMessage) {
+                toastMessage.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 4000);
+            }
+        }
+
+        // Additional Utility Functions
+        function resetDailyProgress() {
+            userStats.waterGlasses = 0;
+            userStats.meditationMinutes = 0;
+            updateDailyProgress();
+            showToast('📅 Daily progress reset for new day!');
+        }
+
+        function shareProgress() {
+            const shareText = `🌿 I'm on day ${userStats.streak} of my Ayurvedic wellness journey with CUREVEDA! I've earned ${userStats.coins} wellness coins and reached Level ${userStats.level}. Join me at ${window.location.origin}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My CUREVEDA Wellness Journey',
+                    text: shareText,
+                    url: window.location.origin
+                }).catch(err => console.log('Error sharing:', err));
+            } else if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareText).then(() => {
+                    showToast('📋 Progress copied to clipboard! Share with friends!');
+                }).catch(err => {
+                    console.log('Could not copy text: ', err);
+                });
+            }
+        }
+
+        // Handle browser back/forward
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.page) {
+                showPage(event.state.page);
+            }
+        });
+
+        // Handle URL hash on load
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showPage(hash);
+            }
+        });
+    </script>
+</body>
+</html>
