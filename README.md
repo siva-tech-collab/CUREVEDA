@@ -19,3 +19,8 @@ Check out the live site here:
 ---
 
 ## 📂 Project Structure
+CUREVEDA/
+├── index.html # Main entry point (Landing, About, Services, Dashboard)
+├── assets/ 
+├── styles/ 
+└── scripts/ 
