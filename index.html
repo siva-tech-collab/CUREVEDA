@@ -1,4 +1,1037 @@
-<!DOCTYPE html>
+<span style="font-size: 0.875rem; color: var(--primary-gold);">92%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-meditation" style="width: 92%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="loginModalClose">&times;</button>
+            <h3>Welcome Back</h3>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <span id="loginLoading" class="loading" style="display: none;"></span>
+                    Log In
+                </button>
+                <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--text-light);">
+                    Demo: Use any email and password
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Doctor Login Modal -->
+    <div id="doctorLoginModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="doctorLoginModalClose">&times;</button>
+            <h3>Doctor Portal Access</h3>
+            <form id="doctorLoginForm">
+                <div class="form-group">
+                    <label for="doctorLoginEmail">Doctor ID / Email</label>
+                    <input type="email" id="doctorLoginEmail" placeholder="Enter your doctor ID" required>
+                </div>
+                <div class="form-group">
+                    <label for="doctorLoginPassword">Password</label>
+                    <input type="password" id="doctorLoginPassword" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="doctorSpecialty">Specialty</label>
+                    <select id="doctorSpecialty" required>
+                        <option value="">Select your specialty</option>
+                        <option value="general">General Ayurveda</option>
+                        <option value="panchakarma">Panchakarma</option>
+                        <option value="womens-health">Women's Health</option>
+                        <option value="pediatric">Pediatric Ayurveda</option>
+                        <option value="nutrition">Ayurvedic Nutrition</option>
+                        <option value="mental-health">Mental Wellness</option>
+                        <option value="chronic-care">Chronic Disease Management</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <span id="doctorLoginLoading" class="loading" style="display: none;"></span>
+                    Access Doctor Portal
+                </button>
+                <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--text-light);">
+                    Demo: Use any email/password with a specialty selection
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="signupModalClose">&times;</button>
+            <h3>Start Your Journey</h3>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="healthGoal">Primary Health Goal</label>
+                    <select id="healthGoal" required>
+                        <option value="">Select your goal</option>
+                        <option value="stress">Stress Management</option>
+                        <option value="digestion">Digestive Health</option>
+                        <option value="energy">Energy & Vitality</option>
+                        <option value="weight">Weight Management</option>
+                        <option value="sleep">Better Sleep</option>
+                        <option value="immunity">Immunity Boost</option>
+                        <option value="chronic">Chronic Disease Management</option>
+                        <option value="mental">Mental Wellness</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <span id="signupLoading" class="loading" style="display: none;"></span>
+                    Create Account
+                </button>
+                <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--text-light);">
+                    Demo: Use any information to try the platform
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Consultation Booking Modal -->
+    <div id="consultationModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="consultationModalClose">&times;</button>
+            <h3>Book Consultation</h3>
+            <form id="consultationForm">
+                <div class="form-group">
+                    <label for="doctorName">Selected Doctor</label>
+                    <input type="text" id="doctorName" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="consultationDate">Preferred Date</label>
+                    <input type="date" id="consultationDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="consultationTime">Preferred Time</label>
+                    <select id="consultationTime" required>
+                        <option value="">Select time slot</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="consultationType">Consultation Type</label>
+                    <select id="consultationType" required>
+                        <option value="">Select type</option>
+                        <option value="initial">Initial Consultation (60 min) - $150</option>
+                        <option value="followup">Follow-up (30 min) - $75</option>
+                        <option value="emergency">Emergency (Available 24/7) - $200</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="healthConcern">Primary Health Concern</label>
+                    <textarea id="healthConcern" rows="3" placeholder="Brief description of your health concern or goals" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <span id="consultationLoading" class="loading" style="display: none;"></span>
+                    Book Consultation
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Patient Details Modal -->
+    <div id="patientDetailsModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <button class="modal-close" id="patientDetailsModalClose">&times;</button>
+            <h3>Patient Details</h3>
+            <div id="patientDetailsContent">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Patient Modal -->
+    <div id="addPatientModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" id="addPatientModalClose">&times;</button>
+            <h3>Add New Patient</h3>
+            <form id="addPatientForm">
+                <div class="form-group">
+                    <label for="newPatientName">Patient Name</label>
+                    <input type="text" id="newPatientName" placeholder="Enter patient's full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPatientEmail">Email</label>
+                    <input type="email" id="newPatientEmail" placeholder="Enter patient's email" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPatientPhone">Phone Number</label>
+                    <input type="tel" id="newPatientPhone" placeholder="Enter phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPatientAge">Age</label>
+                    <input type="number" id="newPatientAge" placeholder="Patient age" min="1" max="120" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPatientDosha">Dosha Constitution</label>
+                    <select id="newPatientDosha" required>
+                        <option value="">Select Dosha type</option>
+                        <option value="vata">Vata Dominant</option>
+                        <option value="pitta">Pitta Dominant</option>
+                        <option value="kapha">Kapha Dominant</option>
+                        <option value="vata-pitta">Vata-Pitta</option>
+                        <option value="pitta-kapha">Pitta-Kapha</option>
+                        <option value="vata-kapha">Vata-Kapha</option>
+                        <option value="tridosha">Tridosha (Balanced)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newPatientCondition">Primary Health Concern</label>
+                    <textarea id="newPatientCondition" rows="3" placeholder="Describe primary health concerns or goals" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <span id="addPatientLoading" class="loading" style="display: none;"></span>
+                    Add Patient
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toastMessage">Action completed successfully!</span>
+    </div>
+
+    <script>
+        // Application State
+        let currentUser = null;
+        let currentDoctor = null;
+        let userStats = {
+            streak: 28,
+            coins: 1247,
+            level: 4,
+            progress: 85,
+            waterGlasses: 6,
+            meditationMinutes: 15
+        };
+
+        let doctorStats = {
+            totalPatients: 87,
+            todayAppointments: 12,
+            consultationHours: 6.5,
+            patientSatisfaction: 4.8
+        };
+
+        let patientData = [
+            {
+                id: 1,
+                name: "Priya Sharma",
+                email: "priya.sharma@email.com",
+                dosha: "Vata-Pitta",
+                condition: "Stress Management",
+                streak: 28,
+                progress: 85,
+                status: "active",
+                lastSession: "2 days ago - Pranayama breathing",
+                nextSession: "Today, 4:00 PM - Follow-up consultation",
+                treatment: "Daily meditation, Ashwagandha, Vata-pacifying diet",
+                meditationProgress: 85,
+                dietCompliance: 92
+            },
+            {
+                id: 2,
+                name: "Rahul Gupta",
+                email: "rahul.gupta@email.com",
+                dosha: "Pitta-Kapha",
+                condition: "Digestive Issues",
+                streak: 5,
+                progress: 45,
+                status: "critical",
+                lastSession: "1 week ago - Initial consultation",
+                nextSession: "Tomorrow, 10:00 AM - Progress review",
+                treatment: "Triphala, Pitta-cooling diet, stress reduction",
+                medicationAdherence: 45,
+                lifestyleChanges: 60,
+                alert: "Patient reported increased acidity. Consider adjusting herbal dosage."
+            },
+            {
+                id: 3,
+                name: "Sunita Reddy",
+                email: "sunita.reddy@email.com",
+                dosha: "Kapha-Vata",
+                condition: "Weight Management",
+                streak: 15,
+                progress: 70,
+                status: "scheduled",
+                lastSession: "3 days ago - Lifestyle coaching",
+                nextSession: "Today, 2:00 PM - Weight progress review",
+                treatment: "Morning walks, Kapha-reducing diet, Guggulu",
+                weightLoss: 70,
+                exerciseRoutine: 85
+            }
+        ];
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('CUREVEDA app initializing...');
+            
+            // Set minimum date for consultation booking to today
+            const today = new Date().toISOString().split('T')[0];
+            const consultationDate = document.getElementById('consultationDate');
+            if (consultationDate) {
+                consultationDate.min = today;
+            }
+
+            // Add event listeners
+            addEventListeners();
+
+            // Initialize animations
+            initializeAnimations();
+
+            // Welcome message
+            setTimeout(() => {
+                showToast('🙏 Welcome to CUREVEDA! Your journey to natural wellness begins here.');
+            }, 1000);
+
+            console.log('CUREVEDA app initialized successfully');
+        });
+
+        function addEventListeners() {
+            // Navigation
+            document.getElementById('logoBtn').addEventListener('click', () => showPage('landing'));
+            document.getElementById('aboutBtn').addEventListener('click', () => showPage('about'));
+            document.getElementById('servicesBtn').addEventListener('click', () => showPage('services'));
+            document.getElementById('doctorsBtn').addEventListener('click', () => showPage('doctors'));
+
+            // Auth buttons
+            document.getElementById('loginBtn').addEventListener('click', () => openModal('login'));
+            document.getElementById('doctorLoginBtn').addEventListener('click', () => openModal('doctorLogin'));
+            document.getElementById('signupBtn').addEventListener('click', () => openModal('signup'));
+            document.getElementById('startJourneyBtn').addEventListener('click', startJourney);
+            document.getElementById('learnMoreBtn').addEventListener('click', () => showPage('about'));
+
+            // Profile dropdown
+            document.getElementById('profileToggle').addEventListener('click', toggleProfileDropdown);
+            document.getElementById('dashboardBtn').addEventListener('click', () => { showPage(currentDoctor ? 'doctorDashboard' : 'dashboard'); closeProfileDropdown(); });
+            document.getElementById('profileSettingsBtn').addEventListener('click', showProfileSettings);
+            document.getElementById('mySessionsBtn').addEventListener('click', showMySessions);
+            document.getElementById('myProgressBtn').addEventListener('click', showMyProgress);
+            document.getElementById('notificationsBtn').addEventListener('click', showNotifications);
+            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+
+            // Dashboard interactions
+            document.getElementById('streakCard')?.addEventListener('click', showStreakDetails);
+            document.getElementById('coinsCard')?.addEventListener('click', showCoinsDetails);
+            document.getElementById('levelCard')?.addEventListener('click', showLevelDetails);
+            document.getElementById('progressCard')?.addEventListener('click', showProgressDetails);
+
+            // Progress steps
+            document.querySelectorAll('.progress-step').forEach(step => {
+                step.addEventListener('click', () => {
+                    const stepNum = step.getAttribute('data-step');
+                    stepClick(parseInt(stepNum));
+                });
+            });
+
+            // Achievements
+            document.querySelectorAll('.achievement-badge').forEach(badge => {
+                badge.addEventListener('click', () => {
+                    const achievement = badge.getAttribute('data-achievement');
+                    showAchievement(achievement);
+                });
+            });
+
+            // Dashboard actions
+            document.getElementById('joinSessionBtn')?.addEventListener('click', joinSession);
+            document.getElementById('waterBar')?.addEventListener('click', updateWater);
+            document.getElementById('meditationBar')?.addEventListener('click', updateMeditation);
+            document.getElementById('addActivityBtn')?.addEventListener('click', addDailyActivity);
+
+            // Modal close buttons
+            document.getElementById('loginModalClose').addEventListener('click', () => closeModal('login'));
+            document.getElementById('doctorLoginModalClose').addEventListener('click', () => closeModal('doctorLogin'));
+            document.getElementById('signupModalClose').addEventListener('click', () => closeModal('signup'));
+            document.getElementById('consultationModalClose').addEventListener('click', () => closeModal('consultation'));
+            document.getElementById('patientDetailsModalClose')?.addEventListener('click', () => closeModal('patientDetails'));
+            document.getElementById('addPatientModalClose')?.addEventListener('click', () => closeModal('addPatient'));
+
+            // Form submissions
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('doctorLoginForm').addEventListener('submit', handleDoctorLogin);
+            document.getElementById('signupForm').addEventListener('submit', handleSignup);
+            document.getElementById('consultationForm').addEventListener('submit', handleConsultation);
+            document.getElementById('addPatientForm')?.addEventListener('submit', handleAddPatient);
+
+            // Doctor dashboard interactions
+            document.getElementById('totalPatientsCard')?.addEventListener('click', showPatientsOverview);
+            document.getElementById('todayAppointmentsCard')?.addEventListener('click', showTodaySchedule);
+            document.getElementById('consultationHoursCard')?.addEventListener('click', showTimeAnalytics);
+            document.getElementById('patientSatisfactionCard')?.addEventListener('click', showSatisfactionReport);
+
+            // Patient management
+            document.getElementById('patientSearch')?.addEventListener('input', filterPatients);
+            document.getElementById('patientFilter')?.addEventListener('change', filterPatients);
+            document.getElementById('addPatientBtn')?.addEventListener('click', () => openModal('addPatient'));
+            document.getElementById('startConsultationBtn')?.addEventListener('click', startConsultation);
+
+            // Consultation booking buttons
+            document.querySelectorAll('.consultation-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const doctorName = btn.getAttribute('data-doctor');
+                    bookConsultation(doctorName);
+                });
+            });
+
+            // Close modals and dropdowns when clicking outside
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('modal')) {
+                    const modalId = event.target.id.replace('Modal', '');
+                    closeModal(modalId);
+                }
+                
+                if (!event.target.closest('.user-profile')) {
+                    closeProfileDropdown();
+                }
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    document.querySelectorAll('.modal.show').forEach(modal => {
+                        modal.classList.remove('show');
+                    });
+                    document.body.style.overflow = 'auto';
+                    closeProfileDropdown();
+                }
+            });
+        }
+
+        function initializeAnimations() {
+            // Initialize floating elements animation
+            const floatingElements = document.querySelectorAll('.floating-element');
+            floatingElements.forEach((el, index) => {
+                el.style.animationDelay = `-${index}s`;
+            });
+
+            // Initialize achievement hover effects
+            const achievements = document.querySelectorAll('.achievement-badge.earned');
+            achievements.forEach(badge => {
+                badge.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.2) rotate(10deg)';
+                });
+                badge.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+            });
+        }
+
+        // Page Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.history.pushState({page: pageId}, '', `#${pageId}`);
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Modal Functions
+        function openModal(modalType) {
+            const modal = document.getElementById(modalType + 'Modal');
+            if (modal) {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalType) {
+            const modal = document.getElementById(modalType + 'Modal');
+            if (modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Authentication Functions
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                showToast('❌ Please fill in all fields');
+                return;
+            }
+            
+            document.getElementById('loginLoading').style.display = 'inline-block';
+            
+            setTimeout(() => {
+                currentUser = {
+                    name: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1),
+                    email: email
+                };
+                
+                updateUserInterface();
+                document.getElementById('loginLoading').style.display = 'none';
+                closeModal('login');
+                showPage('dashboard');
+                showToast('🎉 Welcome back, ' + currentUser.name + '!');
+                
+                // Reset form
+                document.getElementById('loginForm').reset();
+            }, 1500);
+        }
+
+        // Doctor Authentication Functions
+        function handleDoctorLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('doctorLoginEmail').value;
+            const password = document.getElementById('doctorLoginPassword').value;
+            const specialty = document.getElementById('doctorSpecialty').value;
+            
+            if (!email || !password || !specialty) {
+                showToast('❌ Please fill in all fields including specialty');
+                return;
+            }
+            
+            document.getElementById('doctorLoginLoading').style.display = 'inline-block';
+            
+            setTimeout(() => {
+                currentDoctor = {
+                    name: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1),
+                    email: email,
+                    specialty: specialty,
+                    id: 'DR' + Math.floor(Math.random() * 10000)
+                };
+                
+                updateDoctorInterface();
+                document.getElementById('doctorLoginLoading').style.display = 'none';
+                closeModal('doctorLogin');
+                showPage('doctorDashboard');
+                showToast('🩺 Welcome Dr. ' + currentDoctor.name + '! Access to doctor portal granted.');
+                
+                // Reset form
+                document.getElementById('doctorLoginForm').reset();
+            }, 1500);
+        }
+
+        function updateDoctorInterface() {
+            document.getElementById('authButtons').classList.add('hidden');
+            document.getElementById('userProfile').classList.add('show');
+            document.getElementById('profileName').textContent = 'Dr. ' + currentDoctor.name;
+            document.getElementById('profileAvatar').textContent = 'Dr';
+            document.getElementById('doctorName').textContent = currentDoctor.name;
+            
+            // Update dashboard stats
+            updateDoctorStats();
+        }
+
+        function updateDoctorStats() {
+            document.getElementById('totalPatients').textContent = doctorStats.totalPatients;
+            document.getElementById('todayAppointments').textContent = doctorStats.todayAppointments;
+            document.getElementById('consultationHours').textContent = doctorStats.consultationHours + 'h';
+            document.getElementById('patientSatisfaction').textContent = doctorStats.patientSatisfaction;
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const healthGoal = document.getElementById('healthGoal').value;
+            
+            if (!name || !email || !password || !healthGoal) {
+                showToast('❌ Please fill in all fields');
+                return;
+            }
+            
+            document.getElementById('signupLoading').style.display = 'inline-block';
+            
+            setTimeout(() => {
+                currentUser = {
+                    name: name,
+                    email: email,
+                    healthGoal: healthGoal
+                };
+                
+                updateUserInterface();
+                document.getElementById('signupLoading').style.display = 'none';
+                closeModal('signup');
+                showPage('dashboard');
+                showToast('🎉 Welcome to CUREVEDA, ' + name + '! Your wellness journey begins now!');
+                
+                // Reset form
+                document.getElementById('signupForm').reset();
+            }, 2000);
+        }
+
+        // Update user interface when logged in
+        function updateUserInterface() {
+            document.getElementById('authButtons').classList.add('hidden');
+            document.getElementById('userProfile').classList.add('show');
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profileAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+            document.getElementById('userName').textContent = currentUser.name;
+        }
+
+        function handleLogout() {
+            closeProfileDropdown();
+            
+            if (confirm('Are you sure you want to logout?')) {
+                const isDoctor = currentDoctor !== null;
+                currentUser = null;
+                currentDoctor = null;
+                
+                document.getElementById('authButtons').classList.remove('hidden');
+                document.getElementById('userProfile').classList.remove('show');
+                showPage('landing');
+                
+                const userType = isDoctor ? 'doctor' : 'patient';
+                showToast('👋 You have been logged out from the ' + userType + ' portal. Thank you for using CUREVEDA!');
+            }
+        }
+
+        // Profile dropdown functions
+        function toggleProfileDropdown() {
+            document.getElementById('profileDropdown').classList.toggle('show');
+        }
+
+        function closeProfileDropdown() {
+            document.getElementById('profileDropdown').classList.remove('show');
+        }
+
+        function showProfileSettings() {
+            closeProfileDropdown();
+            showToast('⚙️ Profile settings feature coming soon! You can update your preferences and health goals.');
+        }
+
+        function showMySessions() {
+            closeProfileDropdown();
+            showToast('📅 My Sessions: You have 1 upcoming session and 12 completed sessions this month.');
+        }
+
+        function showMyProgress() {
+            closeProfileDropdown();
+            showToast('📊 Progress Report: 85% goal completion, 28-day streak, Level 4 achieved!');
+        }
+
+        function showNotifications() {
+            closeProfileDropdown();
+            showToast('🔔 Notifications: 1 upcoming session reminder, 2 achievement unlocks pending!');
+        }
+
+        // Journey Functions
+        function startJourney() {
+            if (currentUser || currentDoctor) {
+                showPage(currentDoctor ? 'doctorDashboard' : 'dashboard');
+            } else {
+                openModal('signup');
+            }
+        }
+
+        // Consultation Booking
+        function bookConsultation(doctorName) {
+            document.getElementById('doctorName').value = doctorName;
+            openModal('consultation');
+        }
+
+        function handleConsultation(event) {
+            event.preventDefault();
+            const doctor = document.getElementById('doctorName').value;
+            const date = document.getElementById('consultationDate').value;
+            const time = document.getElementById('consultationTime').value;
+            const type = document.getElementById('consultationType').value;
+            const concern = document.getElementById('healthConcern').value;
+            
+            if (!date || !time || !type || !concern) {
+                showToast('❌ Please fill in all fields');
+                return;
+            }
+            
+            document.getElementById('consultationLoading').style.display = 'inline-block';
+            
+            setTimeout(() => {
+                document.getElementById('consultationLoading').style.display = 'none';
+                closeModal('consultation');
+                showToast('🎉 Consultation booked with ' + doctor + ' on ' + date + ' at ' + time + '!');
+                document.getElementById('consultationForm').reset();
+            }, 2000);
+        }
+
+        // Patient Management Functions
+        function viewPatientDetails(patientId) {
+            const patient = patientData.find(p => p.id === patientId);
+            if (!patient) return;
+            
+            const detailsHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <div>
+                        <h4 style="color: var(--earth-brown); margin-bottom: 1rem;">Patient Information</h4>
+                        <p><strong>Name:</strong> ${patient.name}</p>
+                        <p><strong>Email:</strong> ${patient.email}</p>
+                        <p><strong>Dosha:</strong> ${patient.dosha}</p>
+                        <p><strong>Primary Concern:</strong> ${patient.condition}</p>
+                        <p><strong>Status:</strong> ${patient.status.charAt(0).toUpperCase() + patient.status.slice(1)}</p>
+                        <p><strong>Streak:</strong> ${patient.streak} days</p>
+                        <p><strong>Overall Progress:</strong> ${patient.progress}%</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--earth-brown); margin-bottom: 1rem;">Treatment Details</h4>
+                        <p><strong>Last Session:</strong> ${patient.lastSession}</p>
+                        <p><strong>Next Session:</strong> ${patient.nextSession}</p>
+                        <p><strong>Current Treatment:</strong> ${patient.treatment}</p>
+                        ${patient.alert ? `<div class="alert-message" style="margin-top: 1rem;">${patient.alert}</div>` : ''}
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color: var(--earth-brown); margin-bottom: 1rem;">Progress Metrics</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        ${patient.meditationProgress ? `
+                        <div>
+                            <label>Meditation Progress: ${patient.meditationProgress}%</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill progress-meditation" style="width: ${patient.meditationProgress}%;"></div>
+                            </div>
+                        </div>
+                        ` : ''}
+                        ${patient.dietCompliance ? `
+                        <div>
+                            <label>Diet Compliance: ${patient.dietCompliance}%</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill progress-water" style="width: ${patient.dietCompliance}%;"></div>
+                            </div>
+                        </div>
+                        ` : ''}
+                        ${patient.medicationAdherence ? `
+                        <div>
+                            <label>Medication Adherence: ${patient.medicationAdherence}%</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="background: #ff6b6b; width: ${patient.medicationAdherence}%;"></div>
+                            </div>
+                        </div>
+                        ` : ''}
+                        ${patient.weightLoss ? `
+                        <div>
+                            <label>Weight Loss Progress: ${patient.weightLoss}%</label>
+                            <div class="progress-bar">
+                                <div class="progress-fill progress-meditation" style="width: ${patient.weightLoss}%;"></div>
+                            </div>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+                <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                    <button class="btn btn-primary" onclick="scheduleSession(${patientId})">Schedule Session</button>
+                    <button class="btn btn-secondary" onclick="updateTreatment(${patientId})">Update Treatment</button>
+                    <button class="btn btn-secondary" onclick="sendMessage(${patientId})">Send Message</button>
+                </div>
+            `;
+            
+            document.getElementById('patientDetailsContent').innerHTML = detailsHTML;
+            openModal('patientDetails');
+        }
+
+        function scheduleSession(patientId) {
+            closeModal('patientDetails');
+            const patient = patientData.find(p => p.id === patientId);
+            showToast(`📅 Opening scheduler for ${patient.name}... Session booking interface would appear here.`);
+        }
+
+        function updateTreatment(patientId) {
+            const patient = patientData.find(p => p.id === patientId);
+            showToast(`📋 Treatment plan update for ${patient.name} - Clinical interface would open here.`);
+        }
+
+        function sendMessage(patientId) {
+            const patient = patientData.find(p => p.id === patientId);
+            showToast(`💬 Message compose window for ${patient.name} - Secure messaging interface would open here.`);
+        }
+
+        function handleAddPatient(event) {
+            event.preventDefault();
+            const name = document.getElementById('newPatientName').value;
+            const email = document.getElementById('newPatientEmail').value;
+            const phone = document.getElementById('newPatientPhone').value;
+            const age = document.getElementById('newPatientAge').value;
+            const dosha = document.getElementById('newPatientDosha').value;
+            const condition = document.getElementById('newPatientCondition').value;
+            
+            if (!name || !email || !phone || !age || !dosha || !condition) {
+                showToast('❌ Please fill in all fields');
+                return;
+            }
+            
+            document.getElementById('addPatientLoading').style.display = 'inline-block';
+            
+            setTimeout(() => {
+                const newPatient = {
+                    id: patientData.length + 1,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    age: age,
+                    dosha: dosha,
+                    condition: condition,
+                    streak: 0,
+                    progress: 0,
+                    status: 'active',
+                    lastSession: 'Not started',
+                    nextSession: 'To be scheduled',
+                    treatment: 'Initial assessment pending'
+                };
+                
+                patientData.push(newPatient);
+                doctorStats.totalPatients++;
+                updateDoctorStats();
+                
+                document.getElementById('addPatientLoading').style.display = 'none';
+                closeModal('addPatient');
+                showToast(`✅ Patient ${name} added successfully! Initial consultation can now be scheduled.`);
+                document.getElementById('addPatientForm').reset();
+                
+                // Refresh patient list would go here
+                showToast('🔄 Patient list refreshed with new addition');
+            }, 2000);
+        }
+
+        function filterPatients() {
+            const searchTerm = document.getElementById('patientSearch').value.toLowerCase();
+            const filterValue = document.getElementById('patientFilter').value;
+            
+            showToast(`🔍 Filtering patients: "${searchTerm}" with filter "${filterValue}"`);
+        }
+
+        function startConsultation() {
+            showToast('🩺 Starting video consultation with Sunita Reddy... Telehealth interface would launch here.');
+        }
+
+        // Doctor Dashboard Stats Functions
+        function showPatientsOverview() {
+            showToast(`👥 Total Patients: ${doctorStats.totalPatients} active patients under your care. 15 new patients this month.`);
+        }
+
+        function showTodaySchedule() {
+            showToast(`📅 Today's Schedule: ${doctorStats.todayAppointments} appointments scheduled. 3 completed, 9 remaining.`);
+        }
+
+        function showTimeAnalytics() {
+            showToast(`⏰ Time Analytics: ${doctorStats.consultationHours} hours today. Average 7.2 hours daily this week.`);
+        }
+
+        function showSatisfactionReport() {
+            showToast(`⭐ Patient Satisfaction: ${doctorStats.patientSatisfaction}/5.0 rating. 94% patients recommend your care.`);
+        }
+
+        // Dashboard Interactions
+        function showStreakDetails() {
+            showToast('🔥 Amazing! You\'ve maintained your wellness routine for ' + userStats.streak + ' consecutive days!');
+        }
+
+        function showCoinsDetails() {
+            showToast('🪙 You have ' + userStats.coins + ' wellness coins! Use them for premium features and rewards.');
+        }
+
+        function showLevelDetails() {
+            showToast('⭐ You\'re at Wellness Level ' + userStats.level + '! Keep progressing to unlock more features.');
+        }
+
+        function showProgressDetails() {
+            showToast('🎯 You\'re ' + userStats.progress + '% towards your current health goals. Keep it up!');
+        }
+
+        // Progress Step Interactions
+        function stepClick(stepNumber) {
+            const messages = {
+                1: '✅ Constitutional Assessment completed! Your Dosha profile: Vata-Pitta dominant.',
+                2: '✅ Personalized Diet Plan active! Following Vata-pacifying nutrition guidelines.',
+                3: '🧘 Current: Daily Meditation Practice. Complete today\'s session to earn 50 coins!',
+                4: '🌿 Next: Herbal Medicine Consultation scheduled. Unlock by completing meditation streak.',
+                5: '🏠 Final: Lifestyle Integration. The complete wellness transformation awaits!'
+            };
+            showToast(messages[stepNumber]);
+        }
+
+        // Session Functions
+        function joinSession() {
+            showToast('🧘 Joining Pranayama session with Dr. Sharma... Session will start in 5 minutes!');
+            
+            setTimeout(() => {
+                userStats.coins += 50;
+                userStats.meditationMinutes = Math.min(20, userStats.meditationMinutes + 5);
+                updateStats();
+                updateDailyProgress();
+                showToast('🎉 Session completed! +50 coins earned. Great breathing work!');
+            }, 3000);
+        }
+
+        // Achievement Functions
+        function showAchievement(type) {
+            const achievements = {
+                'streak': '🔥 7-Day Streak: Maintained daily wellness activities for a week!',
+                'assessment': '📋 First Assessment: Completed your constitutional analysis!',
+                'diet': '🥗 Diet Master: Following personalized nutrition plan for 2 weeks!',
+                'meditation': '🧘 Meditation Master: Completed 50 meditation sessions!',
+                'herbal': '🌿 Herbal Wisdom: Unlock by completing herbal consultation.',
+                'guru': '⭐ Wellness Guru: Unlock by reaching Level 5 and helping others.'
+            };
+            showToast(achievements[type]);
+        }
+
+        // Progress Tracking
+        function updateWater() {
+            if (userStats.waterGlasses < 8) {
+                userStats.waterGlasses++;
+                userStats.coins += 5;
+                updateDailyProgress();
+                updateStats();
+                showToast('💧 Great! Glass #' + userStats.waterGlasses + ' logged. +5 coins!');
+                
+                if (userStats.waterGlasses === 8) {
+                    setTimeout(() => {
+                        showToast('🎉 Daily water goal achieved! Bonus +25 coins!');
+                        userStats.coins += 25;
+                        updateStats();
+                    }, 1000);
+                }
+            } else {
+                showToast('🎉 Daily water goal already achieved! Excellent hydration!');
+            }
+        }
+
+        function updateMeditation() {
+            if (userStats.meditationMinutes < 20) {
+                userStats.meditationMinutes += 5;
+                userStats.coins += 10;
+                updateDailyProgress();
+                updateStats();
+                showToast('🧘 5 minutes of mindfulness logged. +10 coins!');
+                
+                if (userStats.meditationMinutes === 20) {
+                    setTimeout(() => {
+                        showToast('🎉 Daily meditation goal achieved! Bonus +30 coins!');
+                        userStats.coins += 30;
+                        updateStats();
+                    }, 1000);
+                }
+            } else {
+                showToast('🎉 Daily meditation goal already achieved! Inner peace unlocked!');
+            }
+        }
+
+        function addDailyActivity() {
+            const activities = [
+                'Morning yoga (15 min)',
+                'Herbal tea consumption',
+                'Mindful eating practice',
+                'Evening walk (20 min)',
+                'Gratitude journaling',
+                'Breathing exercises',
+                'Oil pulling',
+                'Tongue scraping',
+                'Abhyanga massage',
+                'Reading Ayurvedic texts'
+            ];
+            
+            const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+            const coinReward = Math.floor(Math.random() * 20) + 15; // 15-34 coins
+            
+            userStats.coins += coinReward;
+            updateStats();
+            showToast('✨ Activity logged: ' + randomActivity + '. +' + coinReward + ' coins earned!');
+        }
+
+        // Update Functions
+        function updateStats() {
+            document.getElementById('coinCount').textContent = userStats.coins.toLocaleString();
+            document.getElementById('streakCount').textContent = userStats.streak;
+            
+            // Level up logic
+            const newLevel = Math.floor(userStats.coins / 300) + 1;
+            if (newLevel > userStats.level) {
+                userStats.level = newLevel;
+                document.getElementById('userLevel').textContent = 'Level ' + userStats.level;
+                setTimeout(() => {
+                    showToast('🎉 LEVEL UP! You\'ve reached Wellness Level ' + userStats.level + '! New features unlocked!');
+                }, 500);
+            }
+        }
+
+        function updateDailyProgress() {
+            // Update water progress
+            document.getElementById('waterProgress').textContent = userStats.waterGlasses + '/8 glasses';
+            const waterFill = document.querySelector('#waterBar .progress-fill');
+            if (waterFill) {
+                waterFill.style.width = (userStats.waterGlasses / 8 * 100) + '%';
+            }
+            
+            // Update meditation progress
+            document.getElementById('meditationProgress').textContent = userStats.meditationMinutes + '/20 min';
+            const meditationFill = document.querySelector('#meditationBar .progress-fill');
+            if (meditationFill) {
+                meditationFill.style.width = (userStats.meditationMinutes / 20 * 100) + '%';
+            }
+        }
+
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            if (toast && toastMessage) {
+                toastMessage.textContent = message;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 4000);
+            }
+        }
+
+        // Handle browser back/forward
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.page) {
+                showPage(event.state.page);
+            }
+        });
+
+        // Handle URL hash on load
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showPage(hash);
+            }
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -364,6 +1397,8 @@
             width: 90%;
             box-shadow: var(--shadow-hover);
             position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .modal-close {
@@ -707,6 +1742,175 @@
             line-height: 1.6;
         }
 
+        /* Patient Management Styles */
+        .patient-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-soft);
+            border-left: 4px solid var(--primary-sage);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .patient-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .patient-card[data-status="critical"] {
+            border-left-color: #ff6b6b;
+            background: linear-gradient(135deg, #fff, #fff5f5);
+        }
+
+        .patient-card[data-status="scheduled"] {
+            border-left-color: var(--accent-orange);
+            background: linear-gradient(135deg, #fff, #fffbf5);
+        }
+
+        .patient-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .patient-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-sage), var(--deep-green));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .patient-info {
+            flex: 1;
+        }
+
+        .patient-info h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .patient-info p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .patient-stats {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            background: rgba(143, 188, 143, 0.1);
+            color: var(--deep-green);
+            border: 1px solid rgba(143, 188, 143, 0.3);
+        }
+
+        .patient-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-direction: column;
+        }
+
+        .patient-summary {
+            border-top: 1px solid #f0f0f0;
+            padding-top: 1rem;
+        }
+
+        .patient-summary p {
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-dark);
+        }
+
+        .alert-message {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        .progress-indicators {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .indicator {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .indicator span {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Appointment List */
+        .appointment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .appointment-item {
+            display: grid;
+            grid-template-columns: 80px 1fr 80px;
+            gap: 0.5rem;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 8px;
+            background: rgba(143, 188, 143, 0.05);
+        }
+
+        .appointment-item .time {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary-gold);
+        }
+
+        .appointment-item .patient {
+            font-size: 0.8rem;
+            color: var(--text-dark);
+        }
+
+        .appointment-item .status {
+            font-size: 0.7rem;
+            text-align: center;
+            padding: 0.25rem;
+            border-radius: 4px;
+        }
+
+        .appointment-item .status.completed {
+            background: var(--primary-sage);
+            color: white;
+        }
+
+        .appointment-item .status.upcoming {
+            background: var(--accent-orange);
+            color: white;
+        }
+
         /* Toast Notification */
         .toast {
             position: fixed;
@@ -725,6 +1929,47 @@
 
         .toast.show {
             transform: translateX(0);
+        }
+
+        /* Progress Bars */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .progress-water {
+            background: linear-gradient(90deg, var(--primary-sage), var(--deep-green));
+        }
+
+        .progress-meditation {
+            background: linear-gradient(90deg, var(--primary-gold), #e6c56b);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 2px solid white;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Responsive Design */
@@ -778,47 +2023,24 @@
                 left: 1rem;
                 max-width: none;
             }
-        }
 
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top: 2px solid white;
-            animation: spin 1s linear infinite;
-            margin-right: 0.5rem;
-        }
+            .modal-content {
+                max-width: 500px;
+            }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+            .patient-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
-        /* Progress Bars */
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
-            overflow: hidden;
-            cursor: pointer;
-        }
+            .patient-actions {
+                flex-direction: row;
+                width: 100%;
+            }
 
-        .progress-fill {
-            height: 100%;
-            transition: width 0.3s ease;
-            border-radius: 4px;
-        }
-
-        .progress-water {
-            background: linear-gradient(90deg, var(--primary-sage), var(--deep-green));
-        }
-
-        .progress-meditation {
-            background: linear-gradient(90deg, var(--primary-gold), #e6c56b);
+            .progress-indicators {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -834,7 +2056,8 @@
                 
                 <!-- Auth buttons - shown when not logged in -->
                 <div class="auth-buttons" id="authButtons">
-                    <button class="btn btn-secondary" id="loginBtn">Login</button>
+                    <button class="btn btn-secondary" id="loginBtn">Patient Login</button>
+                    <button class="btn btn-secondary" id="doctorLoginBtn">Doctor Login</button>
                     <button class="btn btn-primary" id="signupBtn">Sign Up</button>
                 </div>
                 
@@ -842,7 +2065,7 @@
                 <div class="user-profile" id="userProfile">
                     <button class="profile-button" id="profileToggle">
                         <div class="profile-avatar" id="profileAvatar">P</div>
-                        <span id="profileName">Priya</span>
+                        <span id="profileName">User</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="profile-dropdown" id="profileDropdown">
@@ -1155,661 +2378,217 @@
         </div>
     </div>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" id="loginModalClose">&times;</button>
-            <h3>Welcome Back</h3>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+    <!-- Doctor Dashboard -->
+    <div id="doctorDashboard" class="page page-container">
+        <div class="dashboard-header">
+            <h2>Welcome Dr. <span id="doctorName">Rajesh Sharma</span> 👨‍⚕️</h2>
+            <div class="user-stats">
+                <div class="stat-card" id="totalPatientsCard">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-value" id="totalPatients">87</div>
+                    <div class="stat-label">Total Patients</div>
                 </div>
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                <div class="stat-card" id="todayAppointmentsCard">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-value" id="todayAppointments">12</div>
+                    <div class="stat-label">Today's Sessions</div>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    <span id="loginLoading" class="loading" style="display: none;"></span>
-                    Log In
-                </button>
-                <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--text-light);">
-                    Demo: Use any email and password
-                </p>
-            </form>
+                <div class="stat-card" id="consultationHoursCard">
+                    <div class="stat-icon">⏰</div>
+                    <div class="stat-value" id="consultationHours">6.5h</div>
+                    <div class="stat-label">Hours Today</div>
+                </div>
+                <div class="stat-card" id="patientSatisfactionCard">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value" id="patientSatisfaction">4.8</div>
+                    <div class="stat-label">Rating</div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Signup Modal -->
-    <div id="signupModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" id="signupModalClose">&times;</button>
-            <h3>Start Your Journey</h3>
-            <form id="signupForm">
-                <div class="form-group">
-                    <label for="signupName">Full Name</label>
-                    <input type="text" id="signupName" placeholder="Enter your full name" required>
-                </div>
-                <div class="form-group">
-                    <label for="signupEmail">Email</label>
-                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="signupPassword">Password</label>
-                    <input type="password" id="signupPassword" placeholder="Create a password" required>
-                </div>
-                <div class="form-group">
-                    <label for="healthGoal">Primary Health Goal</label>
-                    <select id="healthGoal" required>
-                        <option value="">Select your goal</option>
-                        <option value="stress">Stress Management</option>
-                        <option value="digestion">Digestive Health</option>
-                        <option value="energy">Energy & Vitality</option>
-                        <option value="weight">Weight Management</option>
-                        <option value="sleep">Better Sleep</option>
-                        <option value="immunity">Immunity Boost</option>
-                        <option value="chronic">Chronic Disease Management</option>
-                        <option value="mental">Mental Wellness</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    <span id="signupLoading" class="loading" style="display: none;"></span>
-                    Create Account
-                </button>
-                <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--text-light);">
-                    Demo: Use any information to try the platform
-                </p>
-            </form>
-        </div>
-    </div>
-
-    <!-- Consultation Booking Modal -->
-    <div id="consultationModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" id="consultationModalClose">&times;</button>
-            <h3>Book Consultation</h3>
-            <form id="consultationForm">
-                <div class="form-group">
-                    <label for="doctorName">Selected Doctor</label>
-                    <input type="text" id="doctorName" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="consultationDate">Preferred Date</label>
-                    <input type="date" id="consultationDate" required>
-                </div>
-                <div class="form-group">
-                    <label for="consultationTime">Preferred Time</label>
-                    <select id="consultationTime" required>
-                        <option value="">Select time slot</option>
-                        <option value="09:00">9:00 AM</option>
-                        <option value="10:00">10:00 AM</option>
-                        <option value="11:00">11:00 AM</option>
-                        <option value="14:00">2:00 PM</option>
-                        <option value="15:00">3:00 PM</option>
-                        <option value="16:00">4:00 PM</option>
-                        <option value="17:00">5:00 PM</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="consultationType">Consultation Type</label>
-                    <select id="consultationType" required>
-                        <option value="">Select type</option>
-                        <option value="initial">Initial Consultation (60 min) - $150</option>
-                        <option value="followup">Follow-up (30 min) - $75</option>
-                        <option value="emergency">Emergency (Available 24/7) - $200</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="healthConcern">Primary Health Concern</label>
-                    <textarea id="healthConcern" rows="3" placeholder="Brief description of your health concern or goals" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                    <span id="consultationLoading" class="loading" style="display: none;"></span>
-                    Book Consultation
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="toast">
-        <span id="toastMessage">Action completed successfully!</span>
-    </div>
-
-    <script>
-        // Application State
-        let currentUser = null;
-        let userStats = {
-            streak: 28,
-            coins: 1247,
-            level: 4,
-            progress: 85,
-            waterGlasses: 6,
-            meditationMinutes: 15
-        };
-
-        // Initialize application
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('CUREVEDA app initializing...');
-            
-            // Set minimum date for consultation booking to today
-            const today = new Date().toISOString().split('T')[0];
-            const consultationDate = document.getElementById('consultationDate');
-            if (consultationDate) {
-                consultationDate.min = today;
-            }
-
-            // Add event listeners
-            addEventListeners();
-
-            // Initialize animations
-            initializeAnimations();
-
-            // Welcome message
-            setTimeout(() => {
-                showToast('🙏 Welcome to CUREVEDA! Your journey to natural wellness begins here.');
-            }, 1000);
-
-            console.log('CUREVEDA app initialized successfully');
-        });
-
-        function addEventListeners() {
-            // Navigation
-            document.getElementById('logoBtn').addEventListener('click', () => showPage('landing'));
-            document.getElementById('aboutBtn').addEventListener('click', () => showPage('about'));
-            document.getElementById('servicesBtn').addEventListener('click', () => showPage('services'));
-            document.getElementById('doctorsBtn').addEventListener('click', () => showPage('doctors'));
-
-            // Auth buttons
-            document.getElementById('loginBtn').addEventListener('click', () => openModal('login'));
-            document.getElementById('signupBtn').addEventListener('click', () => openModal('signup'));
-            document.getElementById('startJourneyBtn').addEventListener('click', startJourney);
-            document.getElementById('learnMoreBtn').addEventListener('click', () => showPage('about'));
-
-            // Profile dropdown
-            document.getElementById('profileToggle').addEventListener('click', toggleProfileDropdown);
-            document.getElementById('dashboardBtn').addEventListener('click', () => { showPage('dashboard'); closeProfileDropdown(); });
-            document.getElementById('profileSettingsBtn').addEventListener('click', showProfileSettings);
-            document.getElementById('mySessionsBtn').addEventListener('click', showMySessions);
-            document.getElementById('myProgressBtn').addEventListener('click', showMyProgress);
-            document.getElementById('notificationsBtn').addEventListener('click', showNotifications);
-            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
-
-            // Dashboard interactions
-            document.getElementById('streakCard').addEventListener('click', showStreakDetails);
-            document.getElementById('coinsCard').addEventListener('click', showCoinsDetails);
-            document.getElementById('levelCard').addEventListener('click', showLevelDetails);
-            document.getElementById('progressCard').addEventListener('click', showProgressDetails);
-
-            // Progress steps
-            document.querySelectorAll('.progress-step').forEach(step => {
-                step.addEventListener('click', () => {
-                    const stepNum = step.getAttribute('data-step');
-                    stepClick(parseInt(stepNum));
-                });
-            });
-
-            // Achievements
-            document.querySelectorAll('.achievement-badge').forEach(badge => {
-                badge.addEventListener('click', () => {
-                    const achievement = badge.getAttribute('data-achievement');
-                    showAchievement(achievement);
-                });
-            });
-
-            // Dashboard actions
-            document.getElementById('joinSessionBtn').addEventListener('click', joinSession);
-            document.getElementById('waterBar').addEventListener('click', updateWater);
-            document.getElementById('meditationBar').addEventListener('click', updateMeditation);
-            document.getElementById('addActivityBtn').addEventListener('click', addDailyActivity);
-
-            // Modal close buttons
-            document.getElementById('loginModalClose').addEventListener('click', () => closeModal('login'));
-            document.getElementById('signupModalClose').addEventListener('click', () => closeModal('signup'));
-            document.getElementById('consultationModalClose').addEventListener('click', () => closeModal('consultation'));
-
-            // Form submissions
-            document.getElementById('loginForm').addEventListener('submit', handleLogin);
-            document.getElementById('signupForm').addEventListener('submit', handleSignup);
-            document.getElementById('consultationForm').addEventListener('submit', handleConsultation);
-
-            // Consultation booking buttons
-            document.querySelectorAll('.consultation-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const doctorName = btn.getAttribute('data-doctor');
-                    bookConsultation(doctorName);
-                });
-            });
-
-            // Close modals and dropdowns when clicking outside
-            document.addEventListener('click', function(event) {
-                if (event.target.classList.contains('modal')) {
-                    const modalId = event.target.id.replace('Modal', '');
-                    closeModal(modalId);
-                }
+        <div class="dashboard-content">
+            <div class="progress-section">
+                <h3 class="section-title">👥 Patient Management</h3>
                 
-                if (!event.target.closest('.user-profile')) {
-                    closeProfileDropdown();
-                }
-            });
+                <!-- Patient Search and Filters -->
+                <div style="margin-bottom: 2rem;">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                        <input type="text" id="patientSearch" placeholder="Search patients..." style="flex: 1; min-width: 200px; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 10px;">
+                        <select id="patientFilter" style="padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 10px;">
+                            <option value="">All Patients</option>
+                            <option value="active">Active Treatment</option>
+                            <option value="completed">Treatment Completed</option>
+                            <option value="scheduled">Appointments Today</option>
+                            <option value="critical">Needs Attention</option>
+                        </select>
+                        <button class="btn btn-primary" id="addPatientBtn">Add New Patient</button>
+                    </div>
+                </div>
 
-            // Keyboard shortcuts
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    document.querySelectorAll('.modal.show').forEach(modal => {
-                        modal.classList.remove('show');
-                    });
-                    document.body.style.overflow = 'auto';
-                    closeProfileDropdown();
-                }
-            });
-        }
+                <!-- Patient List -->
+                <div id="patientList">
+                    <!-- Patient Card 1 -->
+                    <div class="patient-card" data-patient-id="1" data-status="active">
+                        <div class="patient-header">
+                            <div class="patient-avatar">P</div>
+                            <div class="patient-info">
+                                <h4>Priya Sharma</h4>
+                                <p>Vata-Pitta | Stress Management</p>
+                                <div class="patient-stats">
+                                    <span class="stat-item">🔥 28-day streak</span>
+                                    <span class="stat-item">📊 85% progress</span>
+                                    <span class="stat-item">💚 Active</span>
+                                </div>
+                            </div>
+                            <div class="patient-actions">
+                                <button class="btn btn-small btn-primary" onclick="viewPatientDetails(1)">View Details</button>
+                                <button class="btn btn-small btn-secondary" onclick="scheduleSession(1)">Schedule</button>
+                            </div>
+                        </div>
+                        <div class="patient-summary">
+                            <p><strong>Last Session:</strong> 2 days ago - Pranayama breathing</p>
+                            <p><strong>Next Session:</strong> Today, 4:00 PM - Follow-up consultation</p>
+                            <p><strong>Current Treatment:</strong> Daily meditation, Ashwagandha, Vata-pacifying diet</p>
+                            <div class="progress-indicators">
+                                <div class="indicator">
+                                    <span>Meditation</span>
+                                    <div class="progress-bar"><div class="progress-fill progress-meditation" style="width: 85%;"></div></div>
+                                </div>
+                                <div class="indicator">
+                                    <span>Diet Compliance</span>
+                                    <div class="progress-bar"><div class="progress-fill progress-water" style="width: 92%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        function initializeAnimations() {
-            // Initialize floating elements animation
-            const floatingElements = document.querySelectorAll('.floating-element');
-            floatingElements.forEach((el, index) => {
-                el.style.animationDelay = `-${index}s`;
-            });
+                    <!-- Patient Card 2 -->
+                    <div class="patient-card" data-patient-id="2" data-status="critical">
+                        <div class="patient-header">
+                            <div class="patient-avatar">R</div>
+                            <div class="patient-info">
+                                <h4>Rahul Gupta</h4>
+                                <p>Pitta-Kapha | Digestive Issues</p>
+                                <div class="patient-stats">
+                                    <span class="stat-item">🔥 5-day streak</span>
+                                    <span class="stat-item">📊 45% progress</span>
+                                    <span class="stat-item">⚠️ Needs Attention</span>
+                                </div>
+                            </div>
+                            <div class="patient-actions">
+                                <button class="btn btn-small btn-primary" onclick="viewPatientDetails(2)">View Details</button>
+                                <button class="btn btn-small btn-secondary" onclick="scheduleSession(2)">Schedule</button>
+                            </div>
+                        </div>
+                        <div class="patient-summary">
+                            <p><strong>Last Session:</strong> 1 week ago - Initial consultation</p>
+                            <p><strong>Next Session:</strong> Tomorrow, 10:00 AM - Progress review</p>
+                            <p><strong>Current Treatment:</strong> Triphala, Pitta-cooling diet, stress reduction</p>
+                            <div class="alert-message">⚠️ Patient reported increased acidity. Consider adjusting herbal dosage.</div>
+                            <div class="progress-indicators">
+                                <div class="indicator">
+                                    <span>Medication Adherence</span>
+                                    <div class="progress-bar"><div class="progress-fill" style="background: #ff6b6b; width: 45%;"></div></div>
+                                </div>
+                                <div class="indicator">
+                                    <span>Lifestyle Changes</span>
+                                    <div class="progress-bar"><div class="progress-fill progress-water" style="width: 60%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            // Initialize achievement hover effects
-            const achievements = document.querySelectorAll('.achievement-badge.earned');
-            achievements.forEach(badge => {
-                badge.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.2) rotate(10deg)';
-                });
-                badge.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1) rotate(0deg)';
-                });
-            });
-        }
+                    <!-- Patient Card 3 -->
+                    <div class="patient-card" data-patient-id="3" data-status="scheduled">
+                        <div class="patient-header">
+                            <div class="patient-avatar">S</div>
+                            <div class="patient-info">
+                                <h4>Sunita Reddy</h4>
+                                <p>Kapha-Vata | Weight Management</p>
+                                <div class="patient-stats">
+                                    <span class="stat-item">🔥 15-day streak</span>
+                                    <span class="stat-item">📊 70% progress</span>
+                                    <span class="stat-item">📅 Today</span>
+                                </div>
+                            </div>
+                            <div class="patient-actions">
+                                <button class="btn btn-small btn-primary" onclick="viewPatientDetails(3)">View Details</button>
+                                <button class="btn btn-small btn-secondary" onclick="scheduleSession(3)">Schedule</button>
+                            </div>
+                        </div>
+                        <div class="patient-summary">
+                            <p><strong>Last Session:</strong> 3 days ago - Lifestyle coaching</p>
+                            <p><strong>Next Session:</strong> Today, 2:00 PM - Weight progress review</p>
+                            <p><strong>Current Treatment:</strong> Morning walks, Kapha-reducing diet, Guggulu</p>
+                            <div class="progress-indicators">
+                                <div class="indicator">
+                                    <span>Weight Loss</span>
+                                    <div class="progress-bar"><div class="progress-fill progress-meditation" style="width: 70%;"></div></div>
+                                </div>
+                                <div class="indicator">
+                                    <span>Exercise Routine</span>
+                                    <div class="progress-bar"><div class="progress-fill progress-water" style="width: 85%;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        // Page Navigation
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-                window.history.pushState({page: pageId}, '', `#${pageId}`);
-                window.scrollTo(0, 0);
-            }
-        }
+            <div class="dashboard-sidebar">
+                <div class="sidebar-card next-session">
+                    <div class="session-time">Next Appointment • Today, 2:00 PM</div>
+                    <div class="session-title">Sunita Reddy</div>
+                    <div class="session-meta">
+                        <span>📋 Follow-up</span>
+                        <span>⏰ 30 min</span>
+                    </div>
+                    <button class="btn btn-primary" id="startConsultationBtn" style="width: 100%; font-size: 0.875rem;">Start Consultation</button>
+                </div>
 
-        // Modal Functions
-        function openModal(modalType) {
-            const modal = document.getElementById(modalType + 'Modal');
-            if (modal) {
-                modal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            }
-        }
+                <div class="sidebar-card">
+                    <h4 class="section-title" style="font-size: 1.125rem; margin-bottom: 1rem;">📊 Today's Schedule</h4>
+                    <div class="appointment-list">
+                        <div class="appointment-item">
+                            <div class="time">9:00 AM</div>
+                            <div class="patient">Amit Kumar - Initial</div>
+                            <div class="status completed">✓ Completed</div>
+                        </div>
+                        <div class="appointment-item">
+                            <div class="time">10:30 AM</div>
+                            <div class="patient">Maya Patel - Follow-up</div>
+                            <div class="status completed">✓ Completed</div>
+                        </div>
+                        <div class="appointment-item">
+                            <div class="time">2:00 PM</div>
+                            <div class="patient">Sunita Reddy - Review</div>
+                            <div class="status upcoming">Upcoming</div>
+                        </div>
+                        <div class="appointment-item">
+                            <div class="time">4:00 PM</div>
+                            <div class="patient">Priya Sharma - Session</div>
+                            <div class="status upcoming">Upcoming</div>
+                        </div>
+                        <div class="appointment-item">
+                            <div class="time">5:30 PM</div>
+                            <div class="patient">Raj Malhotra - Initial</div>
+                            <div class="status upcoming">Upcoming</div>
+                        </div>
+                    </div>
+                </div>
 
-        function closeModal(modalType) {
-            const modal = document.getElementById(modalType + 'Modal');
-            if (modal) {
-                modal.classList.remove('show');
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        // Authentication Functions
-        function handleLogin(event) {
-            event.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            if (!email || !password) {
-                showToast('❌ Please fill in all fields');
-                return;
-            }
-            
-            document.getElementById('loginLoading').style.display = 'inline-block';
-            
-            setTimeout(() => {
-                currentUser = {
-                    name: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1),
-                    email: email
-                };
-                
-                updateUserInterface();
-                document.getElementById('loginLoading').style.display = 'none';
-                closeModal('login');
-                showPage('dashboard');
-                showToast('🎉 Welcome back, ' + currentUser.name + '!');
-                
-                // Reset form
-                document.getElementById('loginForm').reset();
-            }, 1500);
-        }
-
-        function handleSignup(event) {
-            event.preventDefault();
-            const name = document.getElementById('signupName').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-            const healthGoal = document.getElementById('healthGoal').value;
-            
-            if (!name || !email || !password || !healthGoal) {
-                showToast('❌ Please fill in all fields');
-                return;
-            }
-            
-            document.getElementById('signupLoading').style.display = 'inline-block';
-            
-            setTimeout(() => {
-                currentUser = {
-                    name: name,
-                    email: email,
-                    healthGoal: healthGoal
-                };
-                
-                updateUserInterface();
-                document.getElementById('signupLoading').style.display = 'none';
-                closeModal('signup');
-                showPage('dashboard');
-                showToast('🎉 Welcome to CUREVEDA, ' + name + '! Your wellness journey begins now!');
-                
-                // Reset form
-                document.getElementById('signupForm').reset();
-            }, 2000);
-        }
-
-        // Update user interface when logged in
-        function updateUserInterface() {
-            document.getElementById('authButtons').classList.add('hidden');
-            document.getElementById('userProfile').classList.add('show');
-            document.getElementById('profileName').textContent = currentUser.name;
-            document.getElementById('profileAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
-            document.getElementById('userName').textContent = currentUser.name;
-        }
-
-        // Profile dropdown functions
-        function toggleProfileDropdown() {
-            document.getElementById('profileDropdown').classList.toggle('show');
-        }
-
-        function closeProfileDropdown() {
-            document.getElementById('profileDropdown').classList.remove('show');
-        }
-
-        function showProfileSettings() {
-            closeProfileDropdown();
-            showToast('⚙️ Profile settings feature coming soon! You can update your preferences and health goals.');
-        }
-
-        function showMySessions() {
-            closeProfileDropdown();
-            showToast('📅 My Sessions: You have 1 upcoming session and 12 completed sessions this month.');
-        }
-
-        function showMyProgress() {
-            closeProfileDropdown();
-            showToast('📊 Progress Report: 85% goal completion, 28-day streak, Level 4 achieved!');
-        }
-
-        function showNotifications() {
-            closeProfileDropdown();
-            showToast('🔔 Notifications: 1 upcoming session reminder, 2 achievement unlocks pending!');
-        }
-
-        function handleLogout() {
-            closeProfileDropdown();
-            
-            if (confirm('Are you sure you want to logout?')) {
-                currentUser = null;
-                document.getElementById('authButtons').classList.remove('hidden');
-                document.getElementById('userProfile').classList.remove('show');
-                showPage('landing');
-                showToast('👋 You have been logged out. Thank you for using CUREVEDA!');
-            }
-        }
-
-        // Journey Functions
-        function startJourney() {
-            if (currentUser) {
-                showPage('dashboard');
-            } else {
-                openModal('signup');
-            }
-        }
-
-        // Consultation Booking
-        function bookConsultation(doctorName) {
-            document.getElementById('doctorName').value = doctorName;
-            openModal('consultation');
-        }
-
-        function handleConsultation(event) {
-            event.preventDefault();
-            const doctor = document.getElementById('doctorName').value;
-            const date = document.getElementById('consultationDate').value;
-            const time = document.getElementById('consultationTime').value;
-            const type = document.getElementById('consultationType').value;
-            const concern = document.getElementById('healthConcern').value;
-            
-            if (!date || !time || !type || !concern) {
-                showToast('❌ Please fill in all fields');
-                return;
-            }
-            
-            document.getElementById('consultationLoading').style.display = 'inline-block';
-            
-            setTimeout(() => {
-                document.getElementById('consultationLoading').style.display = 'none';
-                closeModal('consultation');
-                showToast('🎉 Consultation booked with ' + doctor + ' on ' + date + ' at ' + time + '!');
-                document.getElementById('consultationForm').reset();
-            }, 2000);
-        }
-
-        // Dashboard Interactions
-        function showStreakDetails() {
-            showToast('🔥 Amazing! You\'ve maintained your wellness routine for ' + userStats.streak + ' consecutive days!');
-        }
-
-        function showCoinsDetails() {
-            showToast('🪙 You have ' + userStats.coins + ' wellness coins! Use them for premium features and rewards.');
-        }
-
-        function showLevelDetails() {
-            showToast('⭐ You\'re at Wellness Level ' + userStats.level + '! Keep progressing to unlock more features.');
-        }
-
-        function showProgressDetails() {
-            showToast('🎯 You\'re ' + userStats.progress + '% towards your current health goals. Keep it up!');
-        }
-
-        // Progress Step Interactions
-        function stepClick(stepNumber) {
-            const messages = {
-                1: '✅ Constitutional Assessment completed! Your Dosha profile: Vata-Pitta dominant.',
-                2: '✅ Personalized Diet Plan active! Following Vata-pacifying nutrition guidelines.',
-                3: '🧘 Current: Daily Meditation Practice. Complete today\'s session to earn 50 coins!',
-                4: '🌿 Next: Herbal Medicine Consultation scheduled. Unlock by completing meditation streak.',
-                5: '🏠 Final: Lifestyle Integration. The complete wellness transformation awaits!'
-            };
-            showToast(messages[stepNumber]);
-        }
-
-        // Session Functions
-        function joinSession() {
-            showToast('🧘 Joining Pranayama session with Dr. Sharma... Session will start in 5 minutes!');
-            
-            setTimeout(() => {
-                userStats.coins += 50;
-                userStats.meditationMinutes = Math.min(20, userStats.meditationMinutes + 5);
-                updateStats();
-                updateDailyProgress();
-                showToast('🎉 Session completed! +50 coins earned. Great breathing work!');
-            }, 3000);
-        }
-
-        // Achievement Functions
-        function showAchievement(type) {
-            const achievements = {
-                'streak': '🔥 7-Day Streak: Maintained daily wellness activities for a week!',
-                'assessment': '📋 First Assessment: Completed your constitutional analysis!',
-                'diet': '🥗 Diet Master: Following personalized nutrition plan for 2 weeks!',
-                'meditation': '🧘 Meditation Master: Completed 50 meditation sessions!',
-                'herbal': '🌿 Herbal Wisdom: Unlock by completing herbal consultation.',
-                'guru': '⭐ Wellness Guru: Unlock by reaching Level 5 and helping others.'
-            };
-            showToast(achievements[type]);
-        }
-
-        // Progress Tracking
-        function updateWater() {
-            if (userStats.waterGlasses < 8) {
-                userStats.waterGlasses++;
-                userStats.coins += 5;
-                updateDailyProgress();
-                updateStats();
-                showToast('💧 Great! Glass #' + userStats.waterGlasses + ' logged. +5 coins!');
-                
-                if (userStats.waterGlasses === 8) {
-                    setTimeout(() => {
-                        showToast('🎉 Daily water goal achieved! Bonus +25 coins!');
-                        userStats.coins += 25;
-                        updateStats();
-                    }, 1000);
-                }
-            } else {
-                showToast('🎉 Daily water goal already achieved! Excellent hydration!');
-            }
-        }
-
-        function updateMeditation() {
-            if (userStats.meditationMinutes < 20) {
-                userStats.meditationMinutes += 5;
-                userStats.coins += 10;
-                updateDailyProgress();
-                updateStats();
-                showToast('🧘 5 minutes of mindfulness logged. +10 coins!');
-                
-                if (userStats.meditationMinutes === 20) {
-                    setTimeout(() => {
-                        showToast('🎉 Daily meditation goal achieved! Bonus +30 coins!');
-                        userStats.coins += 30;
-                        updateStats();
-                    }, 1000);
-                }
-            } else {
-                showToast('🎉 Daily meditation goal already achieved! Inner peace unlocked!');
-            }
-        }
-
-        function addDailyActivity() {
-            const activities = [
-                'Morning yoga (15 min)',
-                'Herbal tea consumption',
-                'Mindful eating practice',
-                'Evening walk (20 min)',
-                'Gratitude journaling',
-                'Breathing exercises',
-                'Oil pulling',
-                'Tongue scraping',
-                'Abhyanga massage',
-                'Reading Ayurvedic texts'
-            ];
-            
-            const randomActivity = activities[Math.floor(Math.random() * activities.length)];
-            const coinReward = Math.floor(Math.random() * 20) + 15; // 15-34 coins
-            
-            userStats.coins += coinReward;
-            updateStats();
-            showToast('✨ Activity logged: ' + randomActivity + '. +' + coinReward + ' coins earned!');
-        }
-
-        // Update Functions
-        function updateStats() {
-            document.getElementById('coinCount').textContent = userStats.coins.toLocaleString();
-            document.getElementById('streakCount').textContent = userStats.streak;
-            
-            // Level up logic
-            const newLevel = Math.floor(userStats.coins / 300) + 1;
-            if (newLevel > userStats.level) {
-                userStats.level = newLevel;
-                document.getElementById('userLevel').textContent = 'Level ' + userStats.level;
-                setTimeout(() => {
-                    showToast('🎉 LEVEL UP! You\'ve reached Wellness Level ' + userStats.level + '! New features unlocked!');
-                }, 500);
-            }
-        }
-
-        function updateDailyProgress() {
-            // Update water progress
-            document.getElementById('waterProgress').textContent = userStats.waterGlasses + '/8 glasses';
-            const waterFill = document.querySelector('#waterBar .progress-fill');
-            if (waterFill) {
-                waterFill.style.width = (userStats.waterGlasses / 8 * 100) + '%';
-            }
-            
-            // Update meditation progress
-            document.getElementById('meditationProgress').textContent = userStats.meditationMinutes + '/20 min';
-            const meditationFill = document.querySelector('#meditationBar .progress-fill');
-            if (meditationFill) {
-                meditationFill.style.width = (userStats.meditationMinutes / 20 * 100) + '%';
-            }
-        }
-
-        // Toast Notification
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            
-            if (toast && toastMessage) {
-                toastMessage.textContent = message;
-                toast.classList.add('show');
-                
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 4000);
-            }
-        }
-
-        // Additional Utility Functions
-        function resetDailyProgress() {
-            userStats.waterGlasses = 0;
-            userStats.meditationMinutes = 0;
-            updateDailyProgress();
-            showToast('📅 Daily progress reset for new day!');
-        }
-
-        function shareProgress() {
-            const shareText = `🌿 I'm on day ${userStats.streak} of my Ayurvedic wellness journey with CUREVEDA! I've earned ${userStats.coins} wellness coins and reached Level ${userStats.level}. Join me at ${window.location.origin}`;
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: 'My CUREVEDA Wellness Journey',
-                    text: shareText,
-                    url: window.location.origin
-                }).catch(err => console.log('Error sharing:', err));
-            } else if (navigator.clipboard) {
-                navigator.clipboard.writeText(shareText).then(() => {
-                    showToast('📋 Progress copied to clipboard! Share with friends!');
-                }).catch(err => {
-                    console.log('Could not copy text: ', err);
-                });
-            }
-        }
-
-        // Handle browser back/forward
-        window.addEventListener('popstate', function(event) {
-            if (event.state && event.state.page) {
-                showPage(event.state.page);
-            }
-        });
-
-        // Handle URL hash on load
-        window.addEventListener('load', function() {
-            const hash = window.location.hash.substring(1);
-            if (hash && document.getElementById(hash)) {
-                showPage(hash);
-            }
-        });
-    </script>
-</body>
-</html>
+                <div class="sidebar-card">
+                    <h4 class="section-title" style="font-size: 1.125rem; margin-bottom: 1rem;">📈 Quick Stats</h4>
+                    <div style="margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-size: 0.875rem;">Patient Improvement Rate</span>
+                            <span style="font-size: 0.875rem; color: var(--deep-green);">87%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-water" style="width: 87%;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-size: 0.875rem;">Treatment Adherence</span>
+                            <span style="font-
